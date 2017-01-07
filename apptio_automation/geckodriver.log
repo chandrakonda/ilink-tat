@@ -1,0 +1,25 @@
+1483087463962	geckodriver	INFO	Listening on 127.0.0.1:50311
+1483087465949	mozprofile::profile	INFO	Using profile path C:\Users\User\AppData\Local\Temp\rust_mozprofile.C8mt4ABNs5s0
+1483087465955	geckodriver::marionette	INFO	Starting browser C:\Program Files\Mozilla Firefox\firefox.exe
+1483087465962	geckodriver::marionette	INFO	Connecting to Marionette on localhost:50318
+1483087468346	Marionette	INFO	Listening on port 50318
+JavaScript warning: http://localhost:5000/static/js/live/d3.v3.min.js, line 3: mutating the [[Prototype]] of an object will cause your code to run very slowly; instead create the object with the correct initial [[Prototype]] value using Object.create
+JavaScript warning: https://normandy.cdn.mozilla.net/static/bundles/selfrepair-133d4d7c9de72117ee8e.24ec5279eef1.js, line 7: mutating the [[Prototype]] of an object will cause your code to run very slowly; instead create the object with the correct initial [[Prototype]] value using Object.create
+JavaScript warning: http://localhost:5000/static/js/live/d3.v3.min.js, line 3: mutating the [[Prototype]] of an object will cause your code to run very slowly; instead create the object with the correct initial [[Prototype]] value using Object.create
+JavaScript error: http://localhost:5000/static/js/tax_entry.js, line 89: TypeError: atumGlobalData[cLevel] is undefined
+JavaScript error: https://assets2.jiveon.com/core/2016.3.4.0.efc1903/resources/scripts/gen/main.js, line 1: Error: Script error for: gen/soy/jive/integration/tiles/view/render
+http://requirejs.org/docs/errors.html#scripterror
+JavaScript warning: http://localhost:5000/static/js/live/d3.v3.min.js, line 3: mutating the [[Prototype]] of an object will cause your code to run very slowly; instead create the object with the correct initial [[Prototype]] value using Object.create
+s2.jiveon.com/core/2016.3.4.0.efc1903/resources/scripts/gen/main.js, line 1: Error: Script error for: apps/tips/main
+http://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://assets2.jiveon.com/core/2016.3.4.0.efc1903/resources/scripts/gen/main.js, line 1: Error: Script error for: shindig
+http://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://assets2.jiveon.com/core/2016.3.4.0.efc1903/resources/scripts/gen/main.js, line 1: Error: Script error for: jive/rte4/macro
+http://requirejs.org/docs/errors.html#scripterror
+JavaScript warning: http://localhost:5000/static/js/live/d3.v3.min.js, line 3: mutating the [[Prototype]] of an object will cause your code to run very slowly; instead create the object with the correct initial [[Prototype]] value using Object.create
+/gen/main.js, line 1: Error: Script error for: jive/bundles/zapatec
+http://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://assets2.jiveon.com/core/2016.3.4.0.efc1903/resources/scripts/gen/main.js, line 1: Error: Script error for: shindig
+http://requirejs.org/docs/errors.html#scripterror
+JavaScript error: https://tbmcouncil.jiveon.com/oauth2/authorize?redirect_uri=http://localhost:5000/callback/jive&response_type=code&client_id=kjw7aso3s8sbtcodjq15rtwzbl08h2r6.i, line 450: ReferenceError: Munchkin is not defined
+JavaScript warning: http://localhost:5000/static/js/live/d3.v3.min.js, line 3: mutating the [[Prototype]] of an object will cause your code to run very slowly; instead create the object with the correct initial [[Prototype]] value using Object.create

@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <link href="assets/style.css" rel="stylesheet" type="text/css"/></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (elem.innerHTML === 'Passed') {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    toggle_sort_states(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+    var multiplier = reversed ? -1 : 1;
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+        return multiplier * (key_a >= key_b ? 1 : -1);
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <p>Report generated on 05-Jan-2017 at 23:23:42 by<a href="https://pypi.python.org/pypi/pytest-html"> pytest-html</a> v1.13.0</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.14393</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>2.7.13</td></tr></table>
+    <h2>Summary</h2>
+    <p>4 tests ran in 325.06 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">4 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable numeric" col="duration">Duration</th>
+          <th>Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="5">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Tests/FunctionalTestCases/Test_Functional.py::Test_Functional::()::test_1_login_into_application</td>
+          <td class="col-duration">28.24</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">---------------------------- Captured stdout setup -----------------------------<br/>################## Module Set Up ###################
+Read config data
+Enter create_driver function for creating driver
+Driver folder path is 'C:\Users\User\Anaconda3\envs\pyenv27qa\apptio_automation\Framework\Drivers'
+Creation of 'CHROME' driver is successful
+config file path is  C:\Users\User\Anaconda3\envs\pyenv27qa\apptio_automation\Apptio\Page_Elements\Apptio_Pageelements.txt
+config file path is  C:\Users\User\Anaconda3\envs\pyenv27qa\apptio_automation\Apptio\Test_Data\Apptio_Testdata.txt
+Given URL in config file is 'http://localhost:5000/tbm' 
+####################  Function setup  ####################
+----------------------------- Captured stdout call -----------------------------<br/>2
+user name value is vkrishnan
+Password value is entered
+value is present in the application
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Tests/FunctionalTestCases/Test_Functional.py::Test_Functional::()::test_2_validate_first_column_category_values_with_given_json</td>
+          <td class="col-duration">25.22</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">---------------------------- Captured stdout setup -----------------------------<br/>####################  Function setup  ####################
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Tests/FunctionalTestCases/Test_Functional.py::Test_Functional::()::test_3_validate_child_values_for_parent_with_values_displayed_in_json</td>
+          <td class="col-duration">252.68</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">---------------------------- Captured stdout setup -----------------------------<br/>####################  Function setup  ####################
+----------------------------- Captured stdout call -----------------------------<br/>image is present
+public cloud is not present in json for id 'g_0_business_capabilities'
+g_0_business_capabilities
+No child present in col2 for given col1 value in Json and application
+image is present
+public cloud is not present in json for id 'g_0_services'
+g_0_services
+g_1_end_user_services
+image is present
+public cloud is not present in json for id 'g_1_end_user_services'
+g_2_client_computing
+image is present
+public cloud is not present in json for id 'g_2_client_computing'
+g_3_computer
+image is present
+public cloud is not present in json for id 'g_3_computer'
+		No child present for a given value in Json and application
+g_3_mobile
+image is present
+public cloud is not present in json for id 'g_3_mobile'
+		No child present for a given value in Json and application
+g_3_bring_ur_own_devices
+image is present
+public cloud is not present in json for id 'g_3_bring_ur_own_devices'
+		No child present for a given value in Json and application
+g_3_virtual_client
+image is present
+public cloud is not present in json for id 'g_3_virtual_client'
+		No child present for a given value in Json and application
+g_2_comm_coll
+image is present
+public cloud is not present in json for id 'g_2_comm_coll'
+g_3_collaboration
+image is present
+public cloud is not present in json for id 'g_3_collaboration'
+		No child present for a given value in Json and application
+g_3_communication
+image is present
+public cloud is not present in json for id 'g_3_communication'
+		No child present for a given value in Json and application
+g_3_productivity
+image is present
+public cloud is not present in json for id 'g_3_productivity'
+		No child present for a given value in Json and application
+g_3_print
+image is present
+public cloud is not present in json for id 'g_3_print'
+		No child present for a given value in Json and application
+g_2_connectivity
+image is present
+public cloud is not present in json for id 'g_2_connectivity'
+g_3_network_access
+image is present
+public cloud is not present in json for id 'g_3_network_access'
+		No child present for a given value in Json and application
+g_3_remote_access
+image is present
+public cloud is not present in json for id 'g_3_remote_access'
+		No child present for a given value in Json and application
+g_1_bus_app_services
+image is present
+public cloud is not present in json for id 'g_1_bus_app_services'
+g_2_product_mgmt
+image is present
+public cloud is not present in json for id 'g_2_product_mgmt'
+g_3_product_development
+image is present
+public cloud is not present in json for id 'g_3_product_development'
+		No child present for a given value in Json and application
+g_3_product_planning
+image is present
+public cloud is not present in json for id 'g_3_product_planning'
+		No child present for a given value in Json and application
+g_2_sales_marketing
+image is present
+public cloud is not present in json for id 'g_2_sales_marketing'
+g_3_customer_analytics
+image is present
+public cloud is not present in json for id 'g_3_customer_analytics'
+		No child present for a given value in Json and application
+g_3_marketing_advertising
+image is present
+public cloud is not present in json for id 'g_3_marketing_advertising'
+		No child present for a given value in Json and application
+g_3_salesforce_channel_mgmt
+image is present
+public cloud is not present in json for id 'g_3_salesforce_channel_mgmt'
+		No child present for a given value in Json and application
+g_3_customer_sales
+image is present
+public cloud is not present in json for id 'g_3_customer_sales'
+		No child present for a given value in Json and application
+g_2_manufacturing_delivery
+image is present
+public cloud is not present in json for id 'g_2_manufacturing_delivery'
+g_3_resource_planning
+image is present
+public cloud is not present in json for id 'g_3_resource_planning'
+		No child present for a given value in Json and application
+g_3_manufacturing
+image is present
+public cloud is not present in json for id 'g_3_manufacturing'
+		No child present for a given value in Json and application
+g_3_inventory_warehousing
+image is present
+public cloud is not present in json for id 'g_3_inventory_warehousing'
+		No child present for a given value in Json and application
+g_3_product_delivery
+image is present
+public cloud is not present in json for id 'g_3_product_delivery'
+		No child present for a given value in Json and application
+g_3_service_delivery
+image is present
+public cloud is not present in json for id 'g_3_service_delivery'
+		No child present for a given value in Json and application
+g_2_customer_service
+image is present
+public cloud is not present in json for id 'g_2_customer_service'
+g_3_order_management
+image is present
+public cloud is not present in json for id 'g_3_order_management'
+		No child present for a given value in Json and application
+g_3_customer_care
+image is present
+public cloud is not present in json for id 'g_3_customer_care'
+		No child present for a given value in Json and application
+g_2_finance
+image is present
+public cloud is not present in json for id 'g_2_finance'
+g_3_financial_planning
+image is present
+public cloud is not present in json for id 'g_3_financial_planning'
+		No child present for a given value in Json and application
+g_3_revenue_accounting
+image is present
+public cloud is not present in json for id 'g_3_revenue_accounting'
+		No child present for a given value in Json and application
+g_3_general_accounting
+image is present
+public cloud is not present in json for id 'g_3_general_accounting'
+		No child present for a given value in Json and application
+g_3_fixed_assets
+image is present
+public cloud is not present in json for id 'g_3_fixed_assets'
+		No child present for a given value in Json and application
+g_3_payroll
+image is present
+public cloud is not present in json for id 'g_3_payroll'
+		No child present for a given value in Json and application
+g_3_procurement
+image is present
+public cloud is not present in json for id 'g_3_procurement'
+		No child present for a given value in Json and application
+g_3_accounts_payable
+image is present
+public cloud is not present in json for id 'g_3_accounts_payable'
+		No child present for a given value in Json and application
+g_3_treasury
+image is present
+public cloud is not present in json for id 'g_3_treasury'
+		No child present for a given value in Json and application
+g_3_tax
+image is present
+public cloud is not present in json for id 'g_3_tax'
+		No child present for a given value in Json and application
+g_3_internal_controls
+image is present
+public cloud is not present in json for id 'g_3_internal_controls'
+		No child present for a given value in Json and application
+g_3_consolidation
+image is present
+public cloud is not present in json for id 'g_3_consolidation'
+		No child present for a given value in Json and application
+g_2_human_resources
+image is present
+public cloud is not present in json for id 'g_2_human_resources'
+g_3_recruiting
+image is present
+public cloud is not present in json for id 'g_3_recruiting'
+		No child present for a given value in Json and application
+g_3_talent_management
+image is present
+public cloud is not present in json for id 'g_3_talent_management'
+		No child present for a given value in Json and application
+g_3_workforce_management
+image is present
+public cloud is not present in json for id 'g_3_workforce_management'
+		No child present for a given value in Json and application
+g_3_employee_communications
+image is present
+public cloud is not present in json for id 'g_3_employee_communications'
+		No child present for a given value in Json and application
+g_2_facilities_assets
+image is present
+public cloud is not present in json for id 'g_2_facilities_assets'
+g_3_acquisition
+image is present
+public cloud is not present in json for id 'g_3_acquisition'
+		No child present for a given value in Json and application
+g_3_construction
+image is present
+public cloud is not present in json for id 'g_3_construction'
+		No child present for a given value in Json and application
+g_3_maintenance
+image is present
+public cloud is not present in json for id 'g_3_maintenance'
+		No child present for a given value in Json and application
+g_3_disposal
+image is present
+public cloud is not present in json for id 'g_3_disposal'
+		No child present for a given value in Json and application
+g_2_cross_function_capabilities
+image is present
+public cloud is not present in json for id 'g_2_cross_function_capabilities'
+g_3_enterprise_knowledge_management
+image is present
+public cloud is not present in json for id 'g_3_enterprise_knowledge_management'
+		No child present for a given value in Json and application
+g_3_corporate_communications
+image is present
+public cloud is not present in json for id 'g_3_corporate_communications'
+		No child present for a given value in Json and application
+g_3_legal
+image is present
+public cloud is not present in json for id 'g_3_legal'
+		No child present for a given value in Json and application
+g_1_delivery_services
+image is present
+public cloud is not present in json for id 'g_1_delivery_services'
+g_2_strategy_planning
+image is present
+public cloud is not present in json for id 'g_2_strategy_planning'
+g_3_technology_business_mgmt
+image is present
+public cloud is not present in json for id 'g_3_technology_business_mgmt'
+		No child present for a given value in Json and application
+g_3_innovation_ideation
+image is present
+public cloud is not present in json for id 'g_3_innovation_ideation'
+		No child present for a given value in Json and application
+g_3_sp_enterprise_architecture
+image is present
+public cloud is not present in json for id 'g_3_sp_enterprise_architecture'
+		No child present for a given value in Json and application
+g_3_program_project_mgmt
+image is present
+public cloud is not present in json for id 'g_3_program_project_mgmt'
+		No child present for a given value in Json and application
+g_3_business_solution_consulting
+image is present
+public cloud is not present in json for id 'g_3_business_solution_consulting'
+		No child present for a given value in Json and application
+g_3_sp_it_vendor_mgmt
+image is present
+public cloud is not present in json for id 'g_3_sp_it_vendor_mgmt'
+		No child present for a given value in Json and application
+g_2_development
+image is present
+public cloud is not present in json for id 'g_2_development'
+g_3_design_development
+image is present
+public cloud is not present in json for id 'g_3_design_development'
+		No child present for a given value in Json and application
+g_3_system_integration
+image is present
+public cloud is not present in json for id 'g_3_system_integration'
+		No child present for a given value in Json and application
+g_3_testing
+image is present
+public cloud is not present in json for id 'g_3_testing'
+		No child present for a given value in Json and application
+g_2_support
+image is present
+public cloud is not present in json for id 'g_2_support'
+g_3_service_desk
+image is present
+public cloud is not present in json for id 'g_3_service_desk'
+		No child present for a given value in Json and application
+g_3_application_support
+image is present
+public cloud is not present in json for id 'g_3_application_support'
+		No child present for a given value in Json and application
+g_3_it_training
+image is present
+public cloud is not present in json for id 'g_3_it_training'
+		No child present for a given value in Json and application
+g_3_support_central_print
+image is present
+public cloud is not present in json for id 'g_3_support_central_print'
+		No child present for a given value in Json and application
+g_2_operations
+image is present
+public cloud is not present in json for id 'g_2_operations'
+g_3_operations_it_service_mgmt
+image is present
+public cloud is not present in json for id 'g_3_operations_it_service_mgmt'
+		No child present for a given value in Json and application
+g_3_monitoring
+image is present
+public cloud is not present in json for id 'g_3_monitoring'
+		No child present for a given value in Json and application
+g_3_capacity_mgmt
+image is present
+public cloud is not present in json for id 'g_3_capacity_mgmt'
+		No child present for a given value in Json and application
+g_3_deployment_administration
+image is present
+public cloud is not present in json for id 'g_3_deployment_administration'
+		No child present for a given value in Json and application
+g_2_ds_security_compliance
+image is present
+public cloud is not present in json for id 'g_2_ds_security_compliance'
+g_3_ds_sc_security
+image is present
+public cloud is not present in json for id 'g_3_ds_sc_security'
+		No child present for a given value in Json and application
+g_3_governance_risk_compliance
+image is present
+public cloud is not present in json for id 'g_3_governance_risk_compliance'
+		No child present for a given value in Json and application
+g_3_business_continuity_disaster_recovery
+image is present
+public cloud is not present in json for id 'g_3_business_continuity_disaster_recovery'
+		No child present for a given value in Json and application
+g_1_platform_services
+image is present
+public cloud is not present in json for id 'g_1_platform_services'
+g_2_data
+image is present
+public cloud is not present in json for id 'g_2_data'
+g_3_ps_database
+image is present
+public cloud is present in json for id 'g_3_ps_database'
+Cloud image is present in application for id 'g_3_ps_database'
+		No child present for a given value in Json and application
+g_3_distributed_cache
+image is present
+public cloud is present in json for id 'g_3_distributed_cache'
+Cloud image is present in application for id 'g_3_distributed_cache'
+		No child present for a given value in Json and application
+g_3_data_mgmt
+image is present
+public cloud is present in json for id 'g_3_data_mgmt'
+Cloud image is present in application for id 'g_3_data_mgmt'
+		No child present for a given value in Json and application
+g_3_data_warehouse
+image is present
+public cloud is present in json for id 'g_3_data_warehouse'
+Cloud image is present in application for id 'g_3_data_warehouse'
+		No child present for a given value in Json and application
+g_3_data_analytics_visualizations
+image is present
+public cloud is not present in json for id 'g_3_data_analytics_visualizations'
+		No child present for a given value in Json and application
+g_3_machine_learning
+image is present
+public cloud is present in json for id 'g_3_machine_learning'
+Cloud image is present in application for id 'g_3_machine_learning'
+		No child present for a given value in Json and application
+g_2_ps_applications
+image is present
+public cloud is not present in json for id 'g_2_ps_applications'
+g_3_application_hosting
+image is present
+public cloud is not present in json for id 'g_3_application_hosting'
+		No child present for a given value in Json and application
+g_3_message_bus_integration
+image is present
+public cloud is not present in json for id 'g_3_message_bus_integration'
+		No child present for a given value in Json and application
+g_3_content_mgmt
+image is present
+public cloud is not present in json for id 'g_3_content_mgmt'
+		No child present for a given value in Json and application
+g_3_search
+image is present
+public cloud is present in json for id 'g_3_search'
+Cloud image is present in application for id 'g_3_search'
+		No child present for a given value in Json and application
+g_3_live_streaming
+image is present
+public cloud is not present in json for id 'g_3_live_streaming'
+		No child present for a given value in Json and application
+g_1_infrastructure_services
+image is present
+public cloud is not present in json for id 'g_1_infrastructure_services'
+g_2_infra_services_data_center
+image is present
+public cloud is not present in json for id 'g_2_infra_services_data_center'
+g_3_is_enterprise_data_center
+image is present
+public cloud is not present in json for id 'g_3_is_enterprise_data_center'
+		No child present for a given value in Json and application
+g_3_other_data_center
+image is present
+public cloud is not present in json for id 'g_3_other_data_center'
+		No child present for a given value in Json and application
+g_2_infra_services_network
+image is present
+public cloud is not present in json for id 'g_2_infra_services_network'
+g_3_data_network
+image is present
+public cloud is not present in json for id 'g_3_data_network'
+		No child present for a given value in Json and application
+g_3_voice_network
+image is present
+public cloud is not present in json for id 'g_3_voice_network'
+		No child present for a given value in Json and application
+g_3_internet_connectivity
+image is present
+public cloud is present in json for id 'g_3_internet_connectivity'
+Cloud image is present in application for id 'g_3_internet_connectivity'
+		No child present for a given value in Json and application
+g_3_virtual_private_network
+image is present
+public cloud is not present in json for id 'g_3_virtual_private_network'
+		No child present for a given value in Json and application
+g_3_domain_services
+image is present
+public cloud is not present in json for id 'g_3_domain_services'
+		No child present for a given value in Json and application
+g_3_load_balancing
+image is present
+public cloud is present in json for id 'g_3_load_balancing'
+Cloud image is present in application for id 'g_3_load_balancing'
+		No child present for a given value in Json and application
+g_2_infra_services_compute
+image is present
+public cloud is not present in json for id 'g_2_infra_services_compute'
+g_3_physical_compute
+image is present
+public cloud is not present in json for id 'g_3_physical_compute'
+		No child present for a given value in Json and application
+g_3_virtual_compute_containers
+image is present
+public cloud is not present in json for id 'g_3_virtual_compute_containers'
+		No child present for a given value in Json and application
+g_3_compute_on_demand
+image is present
+public cloud is present in json for id 'g_3_compute_on_demand'
+Cloud image is present in application for id 'g_3_compute_on_demand'
+		No child present for a given value in Json and application
+g_3_is_mainframe
+image is present
+public cloud is not present in json for id 'g_3_is_mainframe'
+		No child present for a given value in Json and application
+g_2_infra_services_storage
+image is present
+public cloud is not present in json for id 'g_2_infra_services_storage'
+g_3_networked_storage
+image is present
+public cloud is present in json for id 'g_3_networked_storage'
+Cloud image is present in application for id 'g_3_networked_storage'
+		No child present for a given value in Json and application
+g_3_file_object_storage
+image is present
+public cloud is present in json for id 'g_3_file_object_storage'
+Cloud image is present in application for id 'g_3_file_object_storage'
+		No child present for a given value in Json and application
+g_3_backup_archive
+image is present
+public cloud is not present in json for id 'g_3_backup_archive'
+		No child present for a given value in Json and application
+g_3_distributed_storage
+image is present
+public cloud is not present in json for id 'g_3_distributed_storage'
+		No child present for a given value in Json and application
+g_1_emerging
+image is present
+public cloud is not present in json for id 'g_1_emerging'
+g_2_internet_of_things
+image is present
+public cloud is not present in json for id 'g_2_internet_of_things'
+		No child present for a given value in Json and application
+g_2_virtual_reality_augmented_reality
+image is present
+public cloud is not present in json for id 'g_2_virtual_reality_augmented_reality'
+		No child present for a given value in Json and application
+g_2_block_chain
+image is present
+public cloud is not present in json for id 'g_2_block_chain'
+		No child present for a given value in Json and application
+image is present
+public cloud is not present in json for id 'g_0_it_towers'
+g_0_it_towers
+g_1_data_center
+image is present
+public cloud is not present in json for id 'g_1_data_center'
+g_2_ent_data_center
+image is present
+public cloud is not present in json for id 'g_2_ent_data_center'
+		No child present for a given value in Json and application
+g_2_other_facilities
+image is present
+public cloud is not present in json for id 'g_2_other_facilities'
+		No child present for a given value in Json and application
+g_1_compute
+image is present
+public cloud is not present in json for id 'g_1_compute'
+g_2_servers
+image is present
+public cloud is not present in json for id 'g_2_servers'
+		No child present for a given value in Json and application
+g_2_unix
+image is present
+public cloud is not present in json for id 'g_2_unix'
+		No child present for a given value in Json and application
+g_2_midrange
+image is present
+public cloud is not present in json for id 'g_2_midrange'
+		No child present for a given value in Json and application
+g_2_converged_infra
+image is present
+public cloud is not present in json for id 'g_2_converged_infra'
+		No child present for a given value in Json and application
+g_2_mainframe
+image is present
+public cloud is not present in json for id 'g_2_mainframe'
+		No child present for a given value in Json and application
+g_1_storage
+image is present
+public cloud is not present in json for id 'g_1_storage'
+g_2_online_storage
+image is present
+public cloud is not present in json for id 'g_2_online_storage'
+		No child present for a given value in Json and application
+g_2_offline_storage
+image is present
+public cloud is not present in json for id 'g_2_offline_storage'
+		No child present for a given value in Json and application
+g_2_mainframe_online_storage
+image is present
+public cloud is not present in json for id 'g_2_mainframe_online_storage'
+		No child present for a given value in Json and application
+g_2_mainframe_offline_storage
+image is present
+public cloud is not present in json for id 'g_2_mainframe_offline_storage'
+		No child present for a given value in Json and application
+g_1_network
+image is present
+public cloud is not present in json for id 'g_1_network'
+g_2_lan_wan
+image is present
+public cloud is not present in json for id 'g_2_lan_wan'
+		No child present for a given value in Json and application
+g_2_voice
+image is present
+public cloud is not present in json for id 'g_2_voice'
+		No child present for a given value in Json and application
+g_2_transport
+image is present
+public cloud is not present in json for id 'g_2_transport'
+		No child present for a given value in Json and application
+g_1_output
+image is present
+public cloud is not present in json for id 'g_1_output'
+g_2_central_print
+image is present
+public cloud is not present in json for id 'g_2_central_print'
+		No child present for a given value in Json and application
+g_1_end_user
+image is present
+public cloud is not present in json for id 'g_1_end_user'
+g_2_workspace
+image is present
+public cloud is not present in json for id 'g_2_workspace'
+		No child present for a given value in Json and application
+g_2_mobile_devices
+image is present
+public cloud is not present in json for id 'g_2_mobile_devices'
+		No child present for a given value in Json and application
+g_2_end_user_software
+image is present
+public cloud is not present in json for id 'g_2_end_user_software'
+		No child present for a given value in Json and application
+g_2_nw_printers
+image is present
+public cloud is not present in json for id 'g_2_nw_printers'
+		No child present for a given value in Json and application
+g_2_conferencing_av
+image is present
+public cloud is not present in json for id 'g_2_conferencing_av'
+		No child present for a given value in Json and application
+g_2_it_help_desk
+image is present
+public cloud is not present in json for id 'g_2_it_help_desk'
+		No child present for a given value in Json and application
+g_2_deskside_support
+image is present
+public cloud is not present in json for id 'g_2_deskside_support'
+		No child present for a given value in Json and application
+g_1_application
+image is present
+public cloud is not present in json for id 'g_1_application'
+g_2_app_dev
+image is present
+public cloud is not present in json for id 'g_2_app_dev'
+		No child present for a given value in Json and application
+g_2_app_support_ops
+image is present
+public cloud is not present in json for id 'g_2_app_support_ops'
+		No child present for a given value in Json and application
+g_2_business_software
+image is present
+public cloud is not present in json for id 'g_2_business_software'
+		No child present for a given value in Json and application
+g_2_database
+image is present
+public cloud is not present in json for id 'g_2_database'
+		No child present for a given value in Json and application
+g_2_middleware
+image is present
+public cloud is not present in json for id 'g_2_middleware'
+		No child present for a given value in Json and application
+g_2_mainframe_db
+image is present
+public cloud is not present in json for id 'g_2_mainframe_db'
+		No child present for a given value in Json and application
+g_2_mainframe_middleware
+image is present
+public cloud is not present in json for id 'g_2_mainframe_middleware'
+		No child present for a given value in Json and application
+g_1_delivery
+image is present
+public cloud is not present in json for id 'g_1_delivery'
+g_2_it_service_mgmt
+image is present
+public cloud is not present in json for id 'g_2_it_service_mgmt'
+		No child present for a given value in Json and application
+g_2_ops_center
+image is present
+public cloud is not present in json for id 'g_2_ops_center'
+		No child present for a given value in Json and application
+g_2_project_mgmt
+image is present
+public cloud is not present in json for id 'g_2_project_mgmt'
+		No child present for a given value in Json and application
+g_2_client_mgmt
+image is present
+public cloud is not present in json for id 'g_2_client_mgmt'
+		No child present for a given value in Json and application
+g_1_security_compliance
+image is present
+public cloud is not present in json for id 'g_1_security_compliance'
+g_2_security
+image is present
+public cloud is not present in json for id 'g_2_security'
+		No child present for a given value in Json and application
+g_2_compliance
+image is present
+public cloud is not present in json for id 'g_2_compliance'
+		No child present for a given value in Json and application
+g_2_disaster_recovery
+image is present
+public cloud is not present in json for id 'g_2_disaster_recovery'
+		No child present for a given value in Json and application
+g_1_it_mgmt
+image is present
+public cloud is not present in json for id 'g_1_it_mgmt'
+g_2_it_mgmt_strategic_planning
+image is present
+public cloud is not present in json for id 'g_2_it_mgmt_strategic_planning'
+		No child present for a given value in Json and application
+g_2_ent_arch
+image is present
+public cloud is not present in json for id 'g_2_ent_arch'
+		No child present for a given value in Json and application
+g_2_it_finance
+image is present
+public cloud is not present in json for id 'g_2_it_finance'
+		No child present for a given value in Json and application
+g_2_it_vendor_mgmt
+image is present
+public cloud is not present in json for id 'g_2_it_vendor_mgmt'
+		No child present for a given value in Json and application
+image is present
+public cloud is not present in json for id 'g_0_cost_pools'
+g_0_cost_pools
+g_1_internal_labor
+image is present
+public cloud is not present in json for id 'g_1_internal_labor'
+g_2_st_internal_labor
+image is present
+public cloud is not present in json for id 'g_2_st_internal_labor'
+		No child present for a given value in Json and application
+g_2_internal_labor_capital
+image is present
+public cloud is not present in json for id 'g_2_internal_labor_capital'
+		No child present for a given value in Json and application
+g_1_external_labor
+image is present
+public cloud is not present in json for id 'g_1_external_labor'
+g_2_st_external_labor
+image is present
+public cloud is not present in json for id 'g_2_st_external_labor'
+		No child present for a given value in Json and application
+g_2_external_labor_capital
+image is present
+public cloud is not present in json for id 'g_2_external_labor_capital'
+		No child present for a given value in Json and application
+g_1_outside_services
+image is present
+public cloud is not present in json for id 'g_1_outside_services'
+g_2_consulting
+image is present
+public cloud is not present in json for id 'g_2_consulting'
+		No child present for a given value in Json and application
+g_2_managed_service_provider
+image is present
+public cloud is not present in json for id 'g_2_managed_service_provider'
+		No child present for a given value in Json and application
+g_2_cloud_service_provider
+image is present
+public cloud is not present in json for id 'g_2_cloud_service_provider'
+		No child present for a given value in Json and application
+g_2_os_capital
+image is present
+public cloud is not present in json for id 'g_2_os_capital'
+		No child present for a given value in Json and application
+g_1_hardware
+image is present
+public cloud is not present in json for id 'g_1_hardware'
+g_2_hw_expense
+image is present
+public cloud is not present in json for id 'g_2_hw_expense'
+		No child present for a given value in Json and application
+g_2_hw_lease
+image is present
+public cloud is not present in json for id 'g_2_hw_lease'
+		No child present for a given value in Json and application
+g_2_hw_maintenance_support
+image is present
+public cloud is not present in json for id 'g_2_hw_maintenance_support'
+		No child present for a given value in Json and application
+g_2_hw_depreciation
+image is present
+public cloud is not present in json for id 'g_2_hw_depreciation'
+		No child present for a given value in Json and application
+g_2_hw_capital
+image is present
+public cloud is not present in json for id 'g_2_hw_capital'
+		No child present for a given value in Json and application
+g_1_software
+image is present
+public cloud is not present in json for id 'g_1_software'
+g_2_sw_expense
+image is present
+public cloud is not present in json for id 'g_2_sw_expense'
+		No child present for a given value in Json and application
+g_2_sw_subscription
+image is present
+public cloud is not present in json for id 'g_2_sw_subscription'
+		No child present for a given value in Json and application
+g_2_sw_maintenance_support
+image is present
+public cloud is not present in json for id 'g_2_sw_maintenance_support'
+		No child present for a given value in Json and application
+g_2_sw_depreciation
+image is present
+public cloud is not present in json for id 'g_2_sw_depreciation'
+		No child present for a given value in Json and application
+g_2_sw_capital
+image is present
+public cloud is not present in json for id 'g_2_sw_capital'
+		No child present for a given value in Json and application
+g_1_facilities_power
+image is present
+public cloud is not present in json for id 'g_1_facilities_power'
+g_2_fp_expense
+image is present
+public cloud is not present in json for id 'g_2_fp_expense'
+		No child present for a given value in Json and application
+g_2_fp_lease
+image is present
+public cloud is not present in json for id 'g_2_fp_lease'
+		No child present for a given value in Json and application
+g_2_fp_maintenance_support
+image is present
+public cloud is not present in json for id 'g_2_fp_maintenance_support'
+		No child present for a given value in Json and application
+g_2_fp_depreciation
+image is present
+public cloud is not present in json for id 'g_2_fp_depreciation'
+		No child present for a given value in Json and application
+g_2_fp_capital
+image is present
+public cloud is not present in json for id 'g_2_fp_capital'
+		No child present for a given value in Json and application
+g_1_telecom
+image is present
+public cloud is not present in json for id 'g_1_telecom'
+g_2_tel_expense
+image is present
+public cloud is not present in json for id 'g_2_tel_expense'
+		No child present for a given value in Json and application
+g_2_tel_lease
+image is present
+public cloud is not present in json for id 'g_2_tel_lease'
+		No child present for a given value in Json and application
+g_2_tel_maintenance
+image is present
+public cloud is not present in json for id 'g_2_tel_maintenance'
+		No child present for a given value in Json and application
+g_2_tel_depreciation
+image is present
+public cloud is not present in json for id 'g_2_tel_depreciation'
+		No child present for a given value in Json and application
+g_2_tel_capital
+image is present
+public cloud is not present in json for id 'g_2_tel_capital'
+		No child present for a given value in Json and application
+g_1_other
+image is present
+public cloud is not present in json for id 'g_1_other'
+g_2_st_other
+image is present
+public cloud is not present in json for id 'g_2_st_other'
+		No child present for a given value in Json and application
+g_1_internal_services
+image is present
+public cloud is not present in json for id 'g_1_internal_services'
+g_2_internal_services_shared_service
+image is present
+public cloud is not present in json for id 'g_2_internal_services_shared_service'
+		No child present for a given value in Json and application
+there are no list values to run
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">Tests/FunctionalTestCases/Test_Functional.py::Test_Functional::()::test_4_validate_service_type_for_a_given_business_unit</td>
+          <td class="col-duration">2.46</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">---------------------------- Captured stdout setup -----------------------------<br/>####################  Function setup  ####################
+</div></td></tr></tbody></table></body></html>

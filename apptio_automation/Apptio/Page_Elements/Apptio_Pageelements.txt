@@ -1,0 +1,31 @@
+[Loginpage]
+circle_image = ["By.CSS_SELECTOR","#circleVersionLabel"]
+click_here_banner = ["By.XPATH",".//*[@id='divTBMIntro']/div/div/div[1]/a"]
+user_name = ["By.CSS_SELECTOR","#username01"]
+password = ["By.CSS_SELECTOR","#password01"]
+login_button = ["By.XPATH", ".//*[@id='login-submit']"]
+tbm_connect_image = ["By.CSS_SELECTOR",".logo>img"]
+tbm_allow_button = ["By.CSS_SELECTOR","input[name='yesButton']"] 
+
+[TBMCouncilPage]
+user_profile_image = ["By.CSS_SELECTOR","#userProfileImage"]
+logout = ["By.CSS_SELECTOR","#userProfileLinks>li a[href='/logout']"]
+image_site_logo = ["By.CSS_SELECTOR","#imgSiteLogo"]
+tbm_left_hand_img = ["By.CSS_SELECTOR",".atumnavbtn.active"]
+category_text_element = ["By.CSS_SELECTOR","[id='{}'] text"]
+category_element_details_class = ["By.CSS_SELECTOR","g[id='{}'] g"]
+column_0 = ["By.CSS_SELECTOR","#svgAtum_Level_{}"]
+column_element_list =["By.CSS_SELECTOR","#svgAtum_Level_{} g"]
+column_element_list_text =["By.CSS_SELECTOR","#svgAtum_Level_{} g text"]
+image_element  = ["By.CSS_SELECTOR","g[id='{}'] g"]
+cloud_image_element= ["By.CSS_SELECTOR","g[id='{}'] >image"]
+rect_class_of_element = ["By.CSS_SELECTOR","g[id='{}'] rect"]
+text_elements = ["By.Java_script","return document.getElementById('{}').getElementsByTagName('text');"]
+
+get_all_header_elements =  ["By.XPATH",".//*[@class='container-fluid']//h3"]
+description_text = ["By.XPATH",".//*[@class='container-fluid']//div[not(text())][@class='detailsText']/child::*"]
+description_text1 = ["By.XPATH",".//*[@class='container-fluid']//h3/following-sibling::div[1]/child::*"]
+children_text_values1 = ["By.XPATH",".//h3[@class='detailsHeader'][normalize-space(text())='{}']/following-sibling::ul[1]/li"]
+
+
+
