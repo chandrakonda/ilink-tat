@@ -8,8 +8,10 @@ import apptio_automation.Framework.Extensions.Custom_logger as  cl
 #function_name, GLOBAL_CONSTANT_NAME, global_var_name, instance_var_name,
 #function_parameter_name, local_var_name
 class LoginPage(element):
-    cl.customLogger(logging.DEBUG)
+    log = cl.customLogger(logging.DEBUG)
     def login(self,user_name,pass_word,json_file_version):
+        self.log.info("##########################################################################")
+        self.log.info("###################Enter Login page########################################")
         try:
             #pdb.set_trace()
             time.sleep(6)
@@ -24,8 +26,8 @@ class LoginPage(element):
             # click on allow button
             element.click_on_element("tbm_allow_button")
             # verify page title 
-            if (element.is_element_displayed("image_site_logo")):
-                print ("value is present in the application")
+            if (element.is_element_displayed_format("image_site_logo")):
+                self.log.info("'{}' Element present in the application ".format("image_site_logo"))
                 is_pass = True
             else:
                 is_pass = False
@@ -40,6 +42,7 @@ class LoginPage(element):
         try:
             element.click_on_element("user_profile_image")
             element.click_on_element("logout")
+            self.log.info("###################Log out from application ########################################")
         except Exception as e:
             self.log.info("Exception thrown while logging out from application {}".format(e))
             raise Exception("Log out failed")

@@ -40,14 +40,15 @@
                                     "parent": "client_computing",
                                     "name": "computer",
                                     "atum_entry": {
-                                        "excludes": [],
-                                        "layer": "services",
-                                        "description": "<p>A selection of personal computers or workstations used at a desk or office and not typically moved. May be dedicated to an individual or shared as in a public location or kiosk. Each type may be ordered with additional memory and storage. Standard corporate image will be loaded on each device. Requestor may order optional software through the Content Authoring services. Includes network and remote network access. Standard support package including security, back-up, updates and patches, remote access, centralized help desk.</p>",
-                                        "service_level_kpis": [
-                                            "Time to provision (order to customer delivery)",
-                                            "Percent of orders delivered to spec",
-                                            "Time to respond (to support request)"
+                                        "excludes": [
+                                            {
+                                                "list": [],
+                                                "cost_pool": "capital"
+                                            }
                                         ],
+                                        "kind": "cost",
+                                        "description": "<p>A selection of personal computers or workstations used at a desk or office and not typically moved. May be dedicated to an individual or shared as in a public location or kiosk. Each type may be ordered with additional memory and storage. Standard corporate image will be loaded on each device. Requestor may order optional software through the Content Authoring services. Includes network and remote network access. Standard support package including security, back-up, updates and patches, remote access, centralized help desk.</p> rtyy",
+                                        "name": "computer",
                                         "level": "service_type",
                                         "target_users": [
                                             {
@@ -59,17 +60,24 @@
                                             }
                                         ],
                                         "deprecation_version": "na",
-                                        "kind": "cost",
-                                        "label": "Desktop/Workstation",
+                                        "label": "Computer 123",
+                                        "layer": "services",
+                                        "children": [],
                                         "atum_version": "2.0",
-                                        "sources": [],
+                                        "service_level_kpis": [
+                                            "Time to provision (order to customer delivery)",
+                                            "Percent of orders delivered to spec",
+                                            "Time to respond (to support request)"
+                                        ],
                                         "field_level": "mandatory",
+                                        "sources": [],
                                         "examples": [
                                             "Standard Desktop",
                                             "Power User Desktop",
                                             "Developers Workstation",
                                             "Graphic Designer Workstation",
-                                            "Shared Workstation"
+                                            "Shared Workstation",
+                                            "kkk"
                                         ],
                                         "uom_list": [
                                             {
@@ -87,13 +95,20 @@
                                             "Included software",
                                             "Support availability & response times"
                                         ],
+                                        "includes": [
+                                            {
+                                                "services": "accounts payable",
+                                                "list": []
+                                            },
+                                            {
+                                                "it_towers": "application",
+                                                "list": []
+                                            }
+                                        ],
                                         "adoption_level": "basic",
-                                        "includes": [],
-                                        "mappings": [],
-                                        "children": [],
-                                        "name": "computer"
+                                        "mappings": []
                                     },
-                                    "label": "Computer",
+                                    "label": "Computer 123",
                                     "id": "computer",
                                     "atum_version": "2.0",
                                     "children": []
@@ -7724,7 +7739,7 @@
                         "level": "tower",
                         "deprecation_version": "na",
                         "kind": "cost",
-                        "label": "Security Compliance",
+                        "label": "Security & Compliance",
                         "atum_version": "2.0",
                         "sources": [],
                         "field_level": "mandatory",
@@ -7739,7 +7754,7 @@
                         ],
                         "description": "<p>This tower includes service costs related to security and compliance in the enterprise IT. The scope includes costs to defining, establishing, enforcing and measuring security and compliance for the enterprise.</p>"
                     },
-                    "label": "Security Compliance",
+                    "label": "Security & Compliance",
                     "id": "security_compliance",
                     "atum_version": "2.0"
                 },

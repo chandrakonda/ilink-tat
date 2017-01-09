@@ -17,15 +17,17 @@ category_element_details_class = ["By.CSS_SELECTOR","g[id='{}'] g"]
 column_0 = ["By.CSS_SELECTOR","#svgAtum_Level_{}"]
 column_element_list =["By.CSS_SELECTOR","#svgAtum_Level_{} g"]
 column_element_list_text =["By.CSS_SELECTOR","#svgAtum_Level_{} g text"]
-image_element  = ["By.CSS_SELECTOR","g[id='{}'] g"]
+image_element  = ["By.CSS_SELECTOR","g[id='{}'] g image"]
 cloud_image_element= ["By.CSS_SELECTOR","g[id='{}'] >image"]
 rect_class_of_element = ["By.CSS_SELECTOR","g[id='{}'] rect"]
-text_elements = ["By.Java_script","return document.getElementById('{}').getElementsByTagName('text');"]
+come_out_of_details = ["By.CSS_SELECTOR","rect[id='rectDetails_{}']"]
+h3_details_header = ["By.CSS_SELECTOR",".detailsHeader"]
+description_text = ["By.CSS_SELECTOR","div[class=detailsText]"]
 
-get_all_header_elements =  ["By.XPATH",".//*[@class='container-fluid']//h3"]
-description_text = ["By.XPATH",".//*[@class='container-fluid']//div[not(text())][@class='detailsText']/child::*"]
-description_text1 = ["By.XPATH",".//*[@class='container-fluid']//h3/following-sibling::div[1]/child::*"]
-children_text_values1 = ["By.XPATH",".//h3[@class='detailsHeader'][normalize-space(text())='{}']/following-sibling::ul[1]/li"]
+text_elements1 = ["By.Java_script","return document.getElementById('{}').getElementsByTagName('text');"]
+get_all_header_elements1 =  ["By.XPATH",".//*[@class='container-fluid']//h3"]
+description_text1 = ["By.XPATH",".//*[@class='container-fluid']//div[not(text())][@class='detailsText']"]
+description_children_text_values = ["By.XPATH",".//h3[@class='detailsHeader'][normalize-space(text())='{}']/following-sibling::ul[1]/li"]
 
 
 

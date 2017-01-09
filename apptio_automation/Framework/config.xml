@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <configuration>
       <loginuser>vkrishnan</loginuser>
-      <loginpassword></loginpassword>
+      <loginpassword>Apptio.Ilink</loginpassword>
       <browser>chrome</browser>
       <connectionstring>sample</connectionstring>
       <projectfoldername>Apptio</projectfoldername>

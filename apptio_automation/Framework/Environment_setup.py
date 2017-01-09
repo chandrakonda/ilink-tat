@@ -22,10 +22,6 @@ class EnvironmentSetup(object):
     dict_config_values = None
     __driver = None
 
-    def __init__(self):
-        #self.load_config_file()
-        pass
-
     def load_config_file(self):
         self.log.info("Read config data")
         print ("Read config data")
@@ -123,8 +119,7 @@ class ConfigValuesToDictionary:
             for child in root:
                 self.dict_config_values[child.tag] = child.text
         except Exception as e:
-            self.log.Error("Exception thrown while loading config file. Please check file in given path ",e)
-            traceback.print_exc()
+            self.log.exception("Exception thrown while loading config file. Please check file in given path ",e)
         self.log.info("Config values are loaded in dictionary and count is {}".format(len(self.dict_config_values)))
 
     @classmethod
@@ -180,6 +175,7 @@ class PageElements():
     def get_element_identifier(cls , name):
        if name in cls.__dict_page_elements:
            __var_element_value = cls.__dict_page_elements[name]
+           cls.log.info("Value returned from page element dictionary is '{}'".format(__var_element_value))
        else:
             #print ("Key error is thrown in the get_element_identifier function. Please check given key value '{}'".format(name))
             raise("Key error is thrown in the get_element_identifier function. Please check given key value '{}'".format(name))
