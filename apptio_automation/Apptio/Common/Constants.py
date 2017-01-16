@@ -2,7 +2,7 @@
 
 class Constant_Values:
 
-    json_attributes_to_check = ["description","examples","uom_list","target_users","service_offering_levers","service_level_kpis"]
+    #json_attributes_to_check = ["description","examples","uom_list","target_users","service_offering_levers","service_level_kpis"]
 
     app_to_json_mapping = {
 
@@ -14,3 +14,6 @@ class Constant_Values:
         "Target Users":"target_users",
         "Service Offering Levers":"service_offering_levers"
     }
+
+    children_validation_col_list = ["keyvalue", "imagepresent", "cloudimage", "children", "childrenstatus","finalstatus"]
+    detail_validation_col_list = ['Top Level', 'Current Testing Node', 'Matching Keys', 'Non Matching Keys', 'Status']

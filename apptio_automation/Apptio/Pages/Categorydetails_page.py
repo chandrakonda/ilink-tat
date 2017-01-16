@@ -3,12 +3,10 @@ import pdb,pytest,logging , sys
 from apptio_automation.Apptio.Json_Helpers.JsonHelpers import JsonHelpers
 import apptio_automation.Framework.Extensions.Custom_logger as  cl
 from apptio_automation.Apptio.Common.Constants import Constant_Values
-#from apptio_automation.Apptio.Json_Helpers.JsonHelpers import JsonHelpers
+from apptio_automation.Framework.Utils.Utilities import compare_dict
+from apptio_automation.Apptio.Common.Apptio_Common import collect_details_results,write_category_details_in_log
 
-
-
-
-
+#pytest.mark.usefixtures("pass_dict", "fail_dict")
 class CategoryDetailsPage(element):
 
     log = cl.customLogger(logging.DEBUG)
@@ -28,70 +26,72 @@ class CategoryDetailsPage(element):
 
 # for each tag get the child items from application
 
-    def get_child_items_for_each_element(self,header_list):
-        app_dict = {}
-        for x in range(0,len(header_list)):
-            __app_header_value = header_list[x]
-            if __app_header_value =="":
-                text_element = element.get_attribute_value("description_text1","innerHTML")
-                app_dict["Description"] = unicode(text_element)
-            elif __app_header_value in self.constant.app_to_json_mapping:
-                __user_list = element.get_text_in_list("description_children_text_values", __app_header_value) # Need to check with constant dictionary
-                app_dict[__app_header_value] = __user_list
-            else:
-                self.log.info("There are no matching values in dictionary")
-            # elif __app_header_value == "Unit of Measure List":
-            #     __m_list = element.get_text_in_list("description_children_text_values","Unit of Measure List")
-            #     app_dict["Unit of Measure List"] = __m_list
-            # elif __app_header_value == "Children":
-            #     __c_list = element.get_text_in_list("description_children_text_values", "Children")
-            #     app_dict["Children"] = __c_list
-            # elif __app_header_value == "Service Offering Levers":
-            #     __s_list = element.get_text_in_list("description_children_text_values", "Service Offering Levers")
-            #     app_dict["Service Offering Levers"] = __s_list
-            # elif __app_header_value == "Service Level KPIs":
-            #     __k_list = element.get_text_in_list("description_children_text_values", "Service Level KPIs")
-            #     app_dict["Service Level KPIs"] = __k_list
-
-        return app_dict
+    def compare_app_json_details_data(self,json_data_object,app_id_value,col1_parent_name):
+        __header_list = self.get_list_of_details_header_names()
+        __json_obj = JsonHelpers()
+        json_expected_details = __json_obj.get_atum_entry_details1(json_data_object,__header_list)
+        app_details = self.get_child_items_for_each_element1(__header_list)
+        added,removed,modified,same = compare_dict(json_expected_details,app_details)
+        print("##########Values that are not matching##############33")
+        print (modified)
+        print("##########Values that are matching##############")
+        print (same)
+        if bool(modified):
+            write_category_details_in_log("datamismatch",modified)
+        collect_details_results(modified,same,app_id_value,col1_parent_name)
 
     def get_child_items_for_each_element1(self, header_list):
         app_dict = {}
         for x in range(0, len(header_list)):
             __app_header_value = header_list[x]
             if __app_header_value == "":
-                text_element = element.get_attribute_value("description_text1", "innerHTML")
-                app_dict["Description"] = unicode(text_element)
+                # description_value = element.is_text_available("description_text1")
+                description_value = element.get_attribute_value("description_text1", "innerHTML")
+                if '<p>' not in description_value:
+                    description_value = element.get_attribute_value("description_text1", "innerText")
+                if "&amp;" in description_value:
+                    description_value = unicode.replace(description_value, '&amp;', "&")
+                # if "</p><p></p>" in description_value:
+                #     description_value = unicode.replace(description_value,"</p><p></p>","<p>")
+                app_dict["Description"] = unicode(description_value)
+            # elif __app_header_value in self.constant.app_to_json_mapping:
+            #     __uom_element_list = element.get_attribute_values_in_list("description_children_text_values","innerHTML",__app_header_value)
+            #     app_dict[__app_header_value] = __uom_element_list
+            elif __app_header_value == "Unit of Measure List":
+                __uom_element_list = element.get_attribute_values_in_list("description_children_text_values", "innerHTML", __app_header_value)
+                __uom_element_list = [val.replace("&amp;","&")for val in __uom_element_list]
+                app_dict[__app_header_value] = __uom_element_list
             elif __app_header_value in self.constant.app_to_json_mapping:
-                __user_list = element.get_text_in_list("description_children_text_values", __app_header_value)  # Need to check with constant dictionary
+                __user_list = element.get_text_in_list("description_children_text_values",
+                                                       __app_header_value)  # Need to check with constant dictionary
                 app_dict[__app_header_value] = __user_list
             else:
                 self.log.info("There are no matching values in dictionary")
         return app_dict
 
-    def compare_app_json_details_data(self,json_data_object):
-        __header_list = self.get_list_of_details_header_names()
-        __json_obj = JsonHelpers()
-        json_expected_details = __json_obj.get_atum_entry_details1(json_data_object,__header_list)
-        app_details = self.get_child_items_for_each_element1(__header_list)
-        added,removed,modified,same = self.compare_dict(json_expected_details,app_details)
-        print("##########Values that are not matching##############33")
-        print (modified)
-        print("##########Values that are matching##############")
-        print (same)
-        # if json_expected_details == app_details:
-        #     print("values are matching")
-        # else:
-        #     print ("value mismatch")
-    def compare_dict(self,d1,d2):
-        d1_keys = set(d1.keys())
-        d2_keys = set(d2.keys())
-        intersect_keys = d1_keys.intersection(d2_keys)
-        added = d1_keys - d2_keys
-        removed = d2_keys - d1_keys
-        modified = {o: (d1[o], d2[o]) for o in intersect_keys if d1[o] != d2[o]}
-        same = set(o for o in intersect_keys if d1[o] == d2[o])
-        return added, removed, modified, same
+
+
+
+            # def collect_results(self,modified,same,current_category_value,):
+    #     #__val = TbmCouncilPage.col1_parent_name
+    #     #__val = getattr(tbmpage,"col1_parent_name")
+    #     __val = 1
+    #     if bool(modified):
+    #         fail_dict ={}
+    #         fail_dict["firstcolvalue"] = __val
+    #         fail_dict["currentkey"] = current_category_value
+    #         fail_dict["values"] = modified
+    #         fail_dict["status"] = "Fail"
+    #         CategoryDetailsPage.fail_list.append(fail_dict)
+    #     elif bool(same):
+    #         pass_dict = {}
+    #         pass_dict["firstcolvalue"] = __val
+    #         pass_dict["currentkey"] = current_category_value
+    #         pass_dict["values"] = same
+    #         pass_dict["status"] = "Pass"
+    #         CategoryDetailsPage.pass_list.append(pass_dict)
+
+
 
 
 # for each tag get child from json
@@ -99,4 +99,14 @@ class CategoryDetailsPage(element):
 # compare values between json and app
 
 # store pas and fail list
+
+        # with open(".\\Results\\differencedata.txt", "a") as myfile:
+        #     myfile.write("\n")
+        #     myfile.write(app_id_value)
+        #     myfile.write("\n Header list from application ")
+        #     myfile.write(str(header_list))
+        #     myfile.write("\n Header values that are not matching")
+        #     myfile.write("\n")
+        #     myfile.write(str(modified))
+
 

@@ -17,7 +17,7 @@ class EnvironmentSetup(object):
     __var_parent_folder_path =  os.path.abspath(os.path.join(os.path.dirname("__file__")))
     __var_framework_path = (os.path.normpath(os.path.join(__var_parent_folder_path, 'Framework')))
     __var_dynamic_name = datetime.now().strftime("%Y%m%d%H%M%S")
-    __var_today_date = datetime.now().strftime("%Y-%m-%d")  # current system date
+    var_today_date = datetime.now().strftime("%Y-%m-%d")  # current system date
     driver_type = None
     dict_config_values = None
     __driver = None
@@ -42,7 +42,7 @@ class EnvironmentSetup(object):
 
     @classmethod
     def get_todays_date(cls):
-        return cls.__var_today_date
+        return cls.var_today_date
 
     #region driver
     # Creates a driver object and returns that object

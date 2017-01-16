@@ -15,7 +15,7 @@ def apptio_setup():
         obj_load_data = LoadTestData()  # load the test data required to execute test cases in this module into dictionary
         obj_load_data.load_data("Test_Data", "Apptio_Testdata")
         EnvironmentSetup.go_to_url()
-        time.sleep(3)
+        #time.sleep(3)
     except:
         traceback.print_exc()
     yield apptio_setup

@@ -1,3 +1,30 @@
+# col1_id_list, col1_value_list = __local_tbm_page_obj.check_and_get_category_values(0)
+# for x in range(0, len(col1_id_list)):
+#     __local_col1_child1 = json_data["children"][x]
+#     __local_tbm_page_obj.click_on_child_element(col1_id_list[x])  # click on child element
+#     __local_tbm_page_obj.click_on_image_element_of_selected_category(col1_id_list[x])
+#     time.sleep(1)
+#     __local_tbm_page_obj.come_out_of_details_section(row_no)
+#     time.sleep(1)
+#     #__local_tbm_page_obj.click_on_child_element(col1_id_list[x])  # click on child element
+#     col2_id_list, col2_value_list = __local_tbm_page_obj.check_and_get_category_values(1)  # check and get child count in col2 from app
+#     __local_json_col2_child_list = __local_json_data_obj.get_child_names_in_list(__local_col1_child1)  # json child count in col2
+#     print(col1_id_list[x])
+#     # print("length of jsonlist and app in col2 {},{}".format(str(len(__local_json_col2_child_list)),str(len(col2_value_list))))
+#     if __local_json_col2_child_list == col2_value_list and len(__local_json_col2_child_list) != 0 and len(col2_value_list) != 0:  # if child2 in json and app are matching
+#         # print('\t\t' + "col2 values from application are matching with Json")
+#         __local_tbm_page_obj.validate_children_of_each_category(col2_id_list, __local_col1_child1,2,row_no+1)
+#     else:
+#         if len(__local_json_col2_child_list) > len(col2_value_list):
+#             pytest.fail("Json data have more values than application..Please check")
+#         elif len(__local_json_col2_child_list) < len(col2_value_list):
+#             pytest.fail("Application values in col2 are not matching with Json")
+#         else:
+#             print("No child present in col2 for given col1 value in Json and application")
+# else:
+#     print("there are no list values to run")
+
+
 #
 # @classmethod
 # #def click_on_element_id_using_javascript1(cls, element_id_value):
@@ -199,3 +226,46 @@
 #             print("there are no list values to run")
 #     except Exception:
 #         raise
+
+#     # pass
+#     # def test_4_validate_category_values1(self,json_data):
+#     #     __local_tbm_page_obj = tbmpage()
+#     #     __local_json_data_obj = JsonHelpers()
+#     #     try:
+#     #         __local_app_first_child_id, __local_app_first_child_value = __local_tbm_page_obj.get_category_values_from_application("column_element_list",0)
+#     #         for x in range(0,len(__local_app_first_child_id)):
+#     #             __local_tbm_page_obj.click_on_child_element(__local_app_first_child_id[x])
+#     #             __local_app_is_child_present_in_col2 = __local_tbm_page_obj.check_for_child_elements("column_0", 1)
+#     #             print(__local_app_first_child_id[x])
+#     #             if __local_app_is_child_present_in_col2:
+#     #                 #print("child present in col2")
+#     #                 __local_app_2_child_id_list, __local_app_2_child_value_list = __local_tbm_page_obj.get_category_values_from_application("column_element_list",1)
+#     #                 for y in range(0,len(__local_app_2_child_id_list)):
+#     #                     print('\t\t'+__local_app_2_child_id_list[y])
+#     #                     __local_tbm_page_obj.click_on_child_element(__local_app_2_child_id_list[y])
+#     #                     __local_app_is_child_present_in_col3 = __local_tbm_page_obj.check_for_child_elements("column_0", 2)
+#     #                     if __local_app_is_child_present_in_col3:
+#     #                         __local_app_3_child_id_list, __local_app_3_child_value_list = __local_tbm_page_obj.get_category_values_from_application("column_element_list",2)
+#     #                         for z in range(0,len(__local_app_3_child_id_list)):
+#     #                             print('\t\t\t' + __local_app_3_child_id_list[z])
+#     #                             __local_tbm_page_obj.click_on_child_element(__local_app_3_child_id_list[z])
+#     #                             __local_app_is_child_present_in_col4 = __local_tbm_page_obj.check_for_child_elements("column_0", 3)
+#     #                             if __local_app_is_child_present_in_col4:
+#     #                                 __local_app_4_child_id_list, __local_app_4_child_value_list = __local_tbm_page_obj.get_category_values_from_application("column_element_list",3)
+#     #                                 print(__local_app_4_child_id_list)
+#     #                             else:
+#     #                                 print('\t\t\t' +"no child present in col4 for given col3 value")
+#     #                             if z == (len(__local_app_3_child_id_list)-1):
+#     #                                 #pdb.set_trace()
+#     #                                 __local_tbm_page_obj.click_on_child_element(__local_app_2_child_id_list[y])
+#     #                     else:
+#     #                         print('\t\t'+"no child present in col3 for given col2 value")
+#     #
+#     #                     if y == (len(__local_app_2_child_id_list)-1):
+#     #                         __local_tbm_page_obj.click_on_child_element(__local_app_first_child_id[x])
+#     #
+#     #             else:
+#     #                 print('\t'+"no child present in col2 for given col1 value")
+#     #
+#     #     except Exception:
+#     #         raise

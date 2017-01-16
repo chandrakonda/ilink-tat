@@ -1,0 +1,102 @@
+Top Level,Current Testing Node,Matching Keys,Non Matching Keys,Status
+business_capabilities,business_capabilities,['Description'],,Pass
+services,services,['Description'],,Pass
+it_towers,it_towers,"['Description', u'Children']",,Pass
+it_towers,data_center,"['Description', u'Children']",,Pass
+it_towers,other_facilities,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,ent_data_center,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,delivery,"['Description', u'Children']",,Pass
+it_towers,ops_center,"[u'Unit of Measure List', 'Description']",,Pass
+it_towers,client_mgmt,,['Description'],Fail
+it_towers,project_mgmt,"[u'Unit of Measure List', 'Description']",,Pass
+it_towers,cloud_ops,"[u'Unit of Measure List', 'Description']",,Pass
+it_towers,compute,"['Description', u'Children']",,Pass
+it_towers,windows,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,mainframe_middleware,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,linux,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,middleware,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,database,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,cloud_platform,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,converged_infra,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,mainframe,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,cloud_linux,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,unix,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,cloud_windows,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,mainframe_db,"[u'Unit of Measure List', 'Description']",,Pass
+it_towers,it_mgmt,"['Description', u'Children']",,Pass
+it_towers,it_mgmt_strategic_planning,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,ent_arch,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,it_vendor_mgmt,"[u'Unit of Measure List', 'Description']",,Pass
+it_towers,it_finance,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,security_compliance,"['Description', u'Children']",,Pass
+it_towers,security,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,compliance,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,disaster_recovery,"['Description', u'Examples']",,Pass
+it_towers,cloud_dr,"['Description', u'Examples']",,Pass
+it_towers,communication,"['Description', u'Children']",,Pass
+it_towers,circuits,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,usage,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,output,"['Description', u'Children']",,Pass
+it_towers,post_processing,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,central_print,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,storage,['Description'],,Pass
+it_towers,tier_2,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,cloud_storage,,['Description'],Fail
+it_towers,tier_4,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,cloud_archive,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,tier_3,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,tier_1,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,network,"['Description', u'Children']",,Pass
+it_towers,lan,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,voice,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,other_network,"['Description', u'Examples']",,Pass
+it_towers,wan,,[u'Unit of Measure List'],Fail
+it_towers,cloud_network,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,end_user,"['Description', u'Children']",,Pass
+it_towers,cloud_desktop,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,service_desk,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,workspace,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,field_support,,['Description'],Fail
+it_towers,mobile_devices,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,application,"['Description', u'Children']",,Pass
+it_towers,app_dev,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,lob_software,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,cloud_apps,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+it_towers,app_support_ops,"[u'Unit of Measure List', 'Description', u'Examples']",,Pass
+cost_pools,cost_pools,"['Description', u'Children']",,Pass
+cost_pools,outside_services,['Description'],,Pass
+cost_pools,os_depreciation,['Description'],,Pass
+cost_pools,managed_service_provider,['Description'],,Pass
+cost_pools,cloud_service_provider,['Description'],,Pass
+cost_pools,consulting,['Description'],,Pass
+cost_pools,os_capital,['Description'],,Pass
+cost_pools,other,['Description'],,Pass
+cost_pools,st_other,['Description'],,Pass
+cost_pools,external_labor,['Description'],,Pass
+cost_pools,st_external_labor,['Description'],,Pass
+cost_pools,hardware,['Description'],,Pass
+cost_pools,hw_capital,['Description'],,Pass
+cost_pools,hw_depreciation,['Description'],,Pass
+cost_pools,hw_lease,['Description'],,Pass
+cost_pools,hw_maintenance_support,['Description'],,Pass
+cost_pools,hw_expense,['Description'],,Pass
+cost_pools,software,['Description'],,Pass
+cost_pools,sw_lease,['Description'],,Pass
+cost_pools,sw_maintenance_support,['Description'],,Pass
+cost_pools,sw_capital,['Description'],,Pass
+cost_pools,sw_depreciation,['Description'],,Pass
+cost_pools,sw_expense,['Description'],,Pass
+cost_pools,telecom,['Description'],,Pass
+cost_pools,tel_expense,['Description'],,Pass
+cost_pools,tel_capital,['Description'],,Pass
+cost_pools,tel_lease,['Description'],,Pass
+cost_pools,tel_maintenance,['Description'],,Pass
+cost_pools,tel_depreciation,['Description'],,Pass
+cost_pools,facilities_power,['Description'],,Pass
+cost_pools,fp_maintenance_support,['Description'],,Pass
+cost_pools,fp_lease,['Description'],,Pass
+cost_pools,fp_expense,['Description'],,Pass
+cost_pools,fp_capital,['Description'],,Pass
+cost_pools,fp_depreciation,['Description'],,Pass
+cost_pools,internal_labor,['Description'],,Pass
+cost_pools,st_internal_labor,['Description'],,Pass

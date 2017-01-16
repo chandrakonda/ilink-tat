@@ -26,7 +26,7 @@ description_text = ["By.CSS_SELECTOR","div[class=detailsText]"]
 
 text_elements1 = ["By.Java_script","return document.getElementById('{}').getElementsByTagName('text');"]
 get_all_header_elements1 =  ["By.XPATH",".//*[@class='container-fluid']//h3"]
-description_text1 = ["By.XPATH",".//*[@class='container-fluid']//div[not(text())][@class='detailsText']"]
+description_text1 = ["By.XPATH",".//*[@id='div_defnDetails_desc']"]
 description_children_text_values = ["By.XPATH",".//h3[@class='detailsHeader'][normalize-space(text())='{}']/following-sibling::ul[1]/li"]
 
 

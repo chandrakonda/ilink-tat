@@ -40,15 +40,14 @@
                                     "parent": "client_computing",
                                     "name": "computer",
                                     "atum_entry": {
-                                        "excludes": [
-                                            {
-                                                "list": [],
-                                                "cost_pool": "capital"
-                                            }
+                                        "excludes": [],
+                                        "layer": "services",
+                                        "description": "<p>A selection of personal computers or workstations used at a desk or office and not typically moved. May be dedicated to an individual or shared as in a public location or kiosk. Each type may be ordered with additional memory and storage. Standard corporate image will be loaded on each device. Requestor may order optional software through the Content Authoring services. Includes network and remote network access. Standard support package including security, back-up, updates and patches, remote access, centralized help desk.</p>",
+                                        "service_level_kpis": [
+                                            "Time to provision (order to customer delivery)",
+                                            "Percent of orders delivered to spec",
+                                            "Time to respond (to support request)"
                                         ],
-                                        "kind": "cost",
-                                        "description": "<p>A selection of personal computers or workstations used at a desk or office and not typically moved. May be dedicated to an individual or shared as in a public location or kiosk. Each type may be ordered with additional memory and storage. Standard corporate image will be loaded on each device. Requestor may order optional software through the Content Authoring services. Includes network and remote network access. Standard support package including security, back-up, updates and patches, remote access, centralized help desk.</p> rtyy",
-                                        "name": "computer",
                                         "level": "service_type",
                                         "target_users": [
                                             {
@@ -60,24 +59,17 @@
                                             }
                                         ],
                                         "deprecation_version": "na",
-                                        "label": "Computer 123",
-                                        "layer": "services",
-                                        "children": [],
+                                        "kind": "cost",
+                                        "label": "Desktop/Workstation",
                                         "atum_version": "2.0",
-                                        "service_level_kpis": [
-                                            "Time to provision (order to customer delivery)",
-                                            "Percent of orders delivered to spec",
-                                            "Time to respond (to support request)"
-                                        ],
-                                        "field_level": "mandatory",
                                         "sources": [],
+                                        "field_level": "mandatory",
                                         "examples": [
                                             "Standard Desktop",
                                             "Power User Desktop",
                                             "Developers Workstation",
                                             "Graphic Designer Workstation",
-                                            "Shared Workstation",
-                                            "kkk"
+                                            "Shared Workstation"
                                         ],
                                         "uom_list": [
                                             {
@@ -95,20 +87,13 @@
                                             "Included software",
                                             "Support availability & response times"
                                         ],
-                                        "includes": [
-                                            {
-                                                "services": "accounts payable",
-                                                "list": []
-                                            },
-                                            {
-                                                "it_towers": "application",
-                                                "list": []
-                                            }
-                                        ],
                                         "adoption_level": "basic",
-                                        "mappings": []
+                                        "includes": [],
+                                        "mappings": [],
+                                        "children": [],
+                                        "name": "computer"
                                     },
-                                    "label": "Computer 123",
+                                    "label": "Computer",
                                     "id": "computer",
                                     "atum_version": "2.0",
                                     "children": []
@@ -737,9 +722,6 @@
                         "atum_version": "2.0",
                         "sources": [],
                         "field_level": "mandatory",
-                        "examples": [
-                            "END USER - SI"
-                        ],
                         "uom_list": [],
                         "mappings": [],
                         "adoption_level": "basic",
@@ -749,7 +731,7 @@
                             "comm_coll",
                             "connectivity"
                         ],
-                        "description": "end user services - Sudhakar"
+                        "description": "end user services"
                     },
                     "label": "End User Services",
                     "id": "end_user_services",
@@ -2819,26 +2801,7 @@
                                             "Transactions",
                                             "Replication"
                                         ],
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "compute services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "storage services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "connectivity services"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "mappings": [],
                                         "adoption_level": "basic",
                                         "examples": [
@@ -2895,26 +2858,7 @@
                                             "Scale",
                                             "Network performance (connections)"
                                         ],
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "compute services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "storage services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "connectivity services"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "mappings": [],
                                         "adoption_level": "basic",
                                         "examples": [
@@ -2972,26 +2916,7 @@
                                             "Capacity reservations"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "compute services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "storage services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "connectivity services"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "name": "data_mgmt",
                                         "children": [],
                                         "mappings": [],
@@ -3055,26 +2980,7 @@
                                             "Support availability & response time"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "compute services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "storage services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "connectivity services"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "name": "data_warehouse",
                                         "children": [],
                                         "mappings": [],
@@ -3166,26 +3072,7 @@
                                             "Number of experiments"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "compute services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "storage services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "connectivity services"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "name": "machine_learning",
                                         "children": [],
                                         "mappings": [],
@@ -3351,26 +3238,7 @@
                                             "# of queries"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "compute services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "storage services"
-                                            },
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "connectivity services"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "name": "search",
                                         "children": [],
                                         "mappings": [],
@@ -3646,14 +3514,7 @@
                                             "Speed of data transfer"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "network"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "name": "internet_connectivity",
                                         "children": [],
                                         "mappings": [],
@@ -3710,16 +3571,10 @@
                                             "Quantity of NAT data processed",
                                             "Geographic location of virtual network"
                                         ],
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "network"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "adoption_level": "basic",
-                                        "name": "virtual_private_network"
+                                        "name": "virtual_private_network",
+                                        "excludes": []
                                     },
                                     "label": "Virtual Private Network (VPN)",
                                     "id": "virtual_private_network",
@@ -3805,14 +3660,7 @@
                                             "Volume of data processed"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "network"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "name": "load_balancing",
                                         "children": [],
                                         "mappings": [],
@@ -3916,14 +3764,7 @@
                                             "Recovery time objectives"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "compute"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "mappings": [],
                                         "children": [],
                                         "name": "physical_compute"
@@ -3987,14 +3828,7 @@
                                             "Recovery time objectives"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "compute"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "mappings": [],
                                         "children": [],
                                         "name": "virtual_compute_containers"
@@ -4053,14 +3887,7 @@
                                             "Number of compute requests"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "compute"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "name": "compute_on_demand",
                                         "children": [],
                                         "mappings": [],
@@ -4127,14 +3954,7 @@
                                             "Support"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "compute"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "mappings": [],
                                         "children": [],
                                         "name": "is_mainframe"
@@ -4224,14 +4044,7 @@
                                             "Storage location"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "storage"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "name": "networked_storage",
                                         "children": [],
                                         "mappings": [],
@@ -4291,14 +4104,7 @@
                                             "Premium high performance Storage"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "storage"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "name": "file_object_storage",
                                         "children": [],
                                         "mappings": [],
@@ -4352,14 +4158,7 @@
                                             "Storage Volume"
                                         ],
                                         "adoption_level": "basic",
-                                        "includes": [
-                                            {
-                                                "list": [
-                                                    "all"
-                                                ],
-                                                "cost_pool": "storage"
-                                            }
-                                        ],
+                                        "includes": [],
                                         "mappings": [],
                                         "children": [],
                                         "name": "backup_archive"
@@ -4606,7 +4405,9 @@
                     "infrastructure_services",
                     "emerging"
                 ],
-                "name": "services"
+                "name": "services",
+                "includes": [],
+                "excludes": []
             },
             "label": "Services",
             "id": "services",
@@ -4622,14 +4423,7 @@
                             "parent": "data_center",
                             "name": "ent_data_center",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "ent_data_center",
                                 "examples": [
@@ -4651,60 +4445,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Power distribution",
-                                            "UPS/backup power",
-                                            "Environment control",
-                                            "Raised Floor",
-                                            "Racks/Cabinets",
-                                            "Copper & fiber cabling",
-                                            "security cameras"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Data Center mgmt. systems",
-                                            "Data Center design software",
-                                            "Power management",
-                                            "physical security software"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed colocation",
-                                            "data center managed services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    },
-                                    {
-                                        "list": [
-                                            "Raised Space",
-                                            "Office Space",
-                                            "Power, Cooling"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Purpose-built data center facilities that house and protect critical IT equipment including the space, power, environment controls, racks, cabling and \"smart hand\" support.</p>"
                             },
@@ -4717,26 +4458,7 @@
                             "parent": "data_center",
                             "name": "other_facilities",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Software"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "other_facilities",
                                 "examples": [
@@ -4758,47 +4480,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "UPS",
-                                            "Racks/Cabinets",
-                                            "Copper & fiber cabling",
-                                            "security cameras"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed colocation",
-                                            "data center managed services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    },
-                                    {
-                                        "list": [
-                                            "Space",
-                                            "Power"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Computer rooms and MDF/IDF/telco closets that house IT equipment in corporate headquarters, call centers or other general purpose office buildings.</p>"
                             },
@@ -4841,20 +4523,7 @@
                             "parent": "compute",
                             "name": "servers",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "servers",
                                 "examples": [
@@ -4879,53 +4548,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Physical servers",
-                                            "chassis",
-                                            "power supply",
-                                            "CPU",
-                                            "memory",
-                                            "Internal storage",
-                                            "network cards",
-                                            "host adapters"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "O/S",
-                                            "Virtualization",
-                                            "Monitoring",
-                                            "Security",
-                                            "Management & Tools"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed Windows compute infrastructure services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Physical and virtual servers on x86 processors; includes hardware, software, labor and support services.</p>"
                             },
@@ -4938,20 +4561,7 @@
                             "parent": "compute",
                             "name": "unix",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "unix",
                                 "examples": [
@@ -4977,52 +4587,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Physical servers",
-                                            "chassis",
-                                            "power supply",
-                                            "CPU",
-                                            "memory",
-                                            "Internal storage",
-                                            "network cards",
-                                            "host adapters"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "O/S",
-                                            "Virtualization",
-                                            "Monitoring",
-                                            "Security, Management & Tools"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed Unix compute infrastructure services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Servers running vendor-specific, proprietary Unix operating systems (e.g. IBM AIX, Sun Solaris, HP UX); includes hardware, software, labor and support services.</p>"
                             },
@@ -5035,32 +4600,7 @@
                             "parent": "compute",
                             "name": "midrange",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Software"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "midrange",
                                 "examples": [
@@ -5082,30 +4622,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Public cloud IaaS Windows compute services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>midrange computers.</p>"
                             },
@@ -5118,20 +4635,7 @@
                             "parent": "compute",
                             "name": "converged_infra",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "converged_infra",
                                 "examples": [
@@ -5152,51 +4656,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "mainframe computers",
-                                            "chassis",
-                                            "power supply",
-                                            "memory",
-                                            "Internal storage",
-                                            "network hardware"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "O/S",
-                                            "Virtualization",
-                                            "Monitoring",
-                                            "Security",
-                                            "Management & Tools"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed infrastructure compute infrastructure services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Purpose-built appliances that provide compute, storage and network capabilities in one box.</p>"
                             },
@@ -5209,20 +4669,7 @@
                             "parent": "compute",
                             "name": "mainframe",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "mainframe",
                                 "examples": [
@@ -5246,51 +4693,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "mainframe computers",
-                                            "chassis",
-                                            "power supply",
-                                            "memory",
-                                            "Internal storage",
-                                            "network hardware"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "O/S",
-                                            "Virtualization",
-                                            "Monitoring",
-                                            "Security",
-                                            "Management & Tools"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed mainframe compute infrastructure services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Traditional mainframe computers and operations running legacy operating systems.</p>"
                             },
@@ -5336,18 +4739,7 @@
                             "parent": "storage",
                             "name": "online_storage",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "Facilities & Power": [
-                                            "All"
-                                        ]
-                                    },
-                                    {
-                                        "Telecom": [
-                                            "All"
-                                        ]
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "online_storage",
                                 "examples": [
@@ -5370,49 +4762,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Storage analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Storage analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Specialized on-line backup/ archive systems",
-                                            "Tape subsystems",
-                                            "Offline supplies (e.g. tapes)"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Backup/restore/ archive maintenance",
-                                            "Reporting",
-                                            "Security",
-                                            "Monitoring",
-                                            "Media Handling / migration"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed storage services",
-                                            "Managed off-site archive services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Storage resources used for servers.</p>"
                             },
@@ -5425,20 +4775,7 @@
                             "parent": "storage",
                             "name": "offline_storage",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "offline_storage",
                                 "examples": [
@@ -5463,47 +4800,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Storage analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Storage analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Storage disk & controllers",
-                                            "Storage servers",
-                                            "Fiber switches"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "software": [
-                                            "Storage maintenance",
-                                            "Replication",
-                                            "Reporting",
-                                            "Security",
-                                            "Monitoring"
-                                        ]
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed storage services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Tape Storage used for servers.</p>"
                             },
@@ -5516,20 +4813,7 @@
                             "parent": "storage",
                             "name": "mainframe_online_storage",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "mainframe_online_storage",
                                 "examples": [
@@ -5555,49 +4839,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Storage analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Storage analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Storage disk & controllers",
-                                            "Storage servers",
-                                            "Fiber switches",
-                                            "Production and Failover devices"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Storage maintenance",
-                                            "Replication",
-                                            "Reporting",
-                                            "Security",
-                                            "Monitoring"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed storage services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Storage resources for mainframes.</p>"
                             },
@@ -5610,20 +4852,7 @@
                             "parent": "storage",
                             "name": "mainframe_offline_storage",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "mainframe_offline_storage",
                                 "examples": [
@@ -5649,49 +4878,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Storage analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Storage analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Storage disk & controllers",
-                                            "Storage servers",
-                                            "Fiber switches",
-                                            "Production and Failover devices"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Storage maintenance",
-                                            "Replication",
-                                            "Reporting",
-                                            "Security",
-                                            "Monitoring"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed storage services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Tape Storage resources for mainframes.</p>"
                             },
@@ -5703,14 +4890,7 @@
                     ],
                     "name": "storage",
                     "atum_entry": {
-                        "excludes": [
-                            {
-                                "list": [
-                                    "internal storage in a server"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "excludes": [],
                         "layer": "it_towers",
                         "name": "storage",
                         "level": "tower",
@@ -5723,16 +4903,7 @@
                         "uom_list": [],
                         "mappings": [],
                         "adoption_level": "basic",
-                        "includes": [
-                            {
-                                "list": [
-                                    "on-line storage for real-time access",
-                                    "near-term archival storage solutions",
-                                    "long-term archival storage solutions"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "includes": [],
                         "children": [
                             "online_storage",
                             "offline_storage",
@@ -5752,20 +4923,7 @@
                             "parent": "network",
                             "name": "lan_wan",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "lan_wan",
                                 "examples": [
@@ -5789,55 +4947,13 @@
                                 "field_level": "mandatory",
                                 "uom_list": [
                                     {
-                                        "description": "<p>An active port is a port on a switch or router that has been activated and/or enabled so that a device can use it. A port may be active even if it is not currently in use. For example, LAN ports are considered active even if a user is not currently seated at the hot-desk (or hotel desk).</p><p>A network switch or \u201dblade\u201d (card) in a switch chassis is not considered active if hard or soft MAC activity (e.g. applying power to switch);  physically patching the switch; or applying policies (QoS or VLAN) for the network is required for its operation.</p><p>These are collected separately by type of device on each tab, and they are a calculated field on the Peer Selection Survey.</p><p>The high level definition is included here, and detailed definitions are included for each device type.</p><p>An end user device is a device used by a user. The primary purpose of a WAN is to connect end user devices to each other, and to central resources such as servers and storage. </p><p>The number of end user devices (EUDs) includes<ol><li>All PCs, terminals, thin clients, PDAs, smartphones and tablets that can be connected to the LAN</li><li>All network connected printers</li><li>Wireless access points (count each as one end user device)</li><li>The maximum number of concurrent Remote Access ports</li><li>Other user or customer peripheral devices such as ATMs, POS terminals.</li></ol><p>When a router is operated by IT on a third party premises, the number of EUDs for this router is 1. A typical example is when a Bank installs one of its routers on a clearing house premises, to guarantee secure communications.</p>Do not include the following in the count of end user devices:<ol><li>Servers - Volumes for Servers connected to the WAN are collected separately in the Compute Tower</li><li>Routers and switches (not usually in the hands of users)</li></ol><p>A Wireless Access Point (WAP) is a device that allows wireless devices to connect to a wired network using Wi-Fi or related standards conforming to IEEE 802.11. The WAP usually connects to a router (via a wired network), and can relay data between the wireless devices (such as computers or printers) and wired devices on the network.</p><p>Concurrent Remote Access Ports refers to the number of Remote Network Access ports for dial-in (the maximum number of simultaneous remote connections), supporting VPN or similar access",
+                                        "description": "<p>An active port is a port on a switch or router that has been activated and/or enabled so that a device can use it. A port may be active even if it is not currently in use. For example, LAN ports are considered active even if a user is not currently seated at the hot-desk (or hotel desk).</p><p>A network switch or \u201dblade\u201d (card) in a switch chassis is not considered active if hard or soft MAC activity (e.g. applying power to switch);  physically patching the switch; or applying policies (QoS or VLAN) for the network is required for its operation.</p><p>These are collected separately by type of device on each tab, and they are a calculated field on the Peer Selection Survey.</p><p>The high level definition is included here, and detailed definitions are included for each device type.</p><p>An end user device is a device used by a user. The primary purpose of a WAN is to connect end user devices to each other, and to central resources such as servers and storage. </p><p>The number of end user devices (EUDs) includes<ol><li>All PCs, terminals, thin clients, PDAs, smartphones and tablets that can be connected to the LAN</li><li>All network connected printers</li><li>Wireless access points (count each as one end user device)</li><li>The maximum number of concurrent Remote Access ports</li><li>Other user or customer peripheral devices such as ATMs, POS terminals.</li></ol><p>When a router is operated by IT on a third party premises, the number of EUDs for this router is 1. A typical example is when a Bank installs one of its routers on a clearing house premises, to guarantee secure communications.</p>Do not include the following in the count of end user devices:<ol><li>Servers - Volumes for Servers connected to the WAN are collected separately in the Compute Tower</li><li>Routers and switches (not usually in the hands of users)</li></ol><p>A Wireless Access Point (WAP) is a device that allows wireless devices to connect to a wired network using Wi-Fi or related standards conforming to IEEE 802.11. The WAP usually connects to a router (via a wired network), and can relay data between the wireless devices (such as computers or printers) and wired devices on the network.</p><p>Concurrent Remote Access Ports refers to the number of Remote Network Access ports for dial-in (the maximum number of simultaneous remote connections), supporting VPN or similar access</p>",
                                         "uom": "Active LAN Ports"
                                     }
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Network analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Network analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Switches",
-                                            "Wireless Access Points (less likely in DC facility)",
-                                            "Routers",
-                                            "Firewalls",
-                                            "DNS",
-                                            "DHCP",
-                                            "Network mgmt."
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Network Mgmt",
-                                            "Security"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed services for network infrastructure"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Physical and wireless local area network (LAN) connecting equipment within the core data centers and connecting end users in office working areas to the company's broader networks.</p><p>Wide area network(WAN) equipment, labor and support services directly connecting data centers, offices and third-parties (excludes telecom and communication services).</p>"
                             },
@@ -5850,20 +4966,7 @@
                             "parent": "network",
                             "name": "voice",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "voice",
                                 "examples": [
@@ -5887,50 +4990,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Telecom analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Telecom analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "PBX",
-                                            "VoIP/IPT Servers",
-                                            "Voicemail",
-                                            "Phones",
-                                            "MAC Supplies"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Voice switch",
-                                            "VoIP/IPT software",
-                                            "Voicemail",
-                                            "Network Mgmt",
-                                            "Chargeback"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed services for voice PBX network"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Voice resources which enable or distribute voice services through on premise equipment including PBX, VoIP, voicemail and handsets (excludes telecom and communication services).</p>"
                             },
@@ -6000,27 +5060,7 @@
                             "parent": "output",
                             "name": "central_print",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "local desktop printers",
-                                            "departmental printers"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "central_print",
                                 "examples": [
@@ -6043,43 +5083,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Centralized printers (including print to non-paper media)",
-                                            "document output to fiche/DVD or other permanent storage medium"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed print services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    },
-                                    {
-                                        "list": [
-                                            "Print management software"
-                                        ],
-                                        "cost_pool": "software"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Central print services; often provided to support customer billing or customer documentation support processes.</p>"
                             },
@@ -6121,27 +5125,7 @@
                             "parent": "end_user",
                             "name": "workspace",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "Computers similar to desktops acting as a servers",
-                                            "computers/devices dedicated to a particular business application such as ATMs or Point-of-sale devices"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "workspace",
                                 "examples": [
@@ -6165,49 +5149,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Desktop",
-                                            "Laptop",
-                                            "Workstations",
-                                            "Local Printers",
-                                            "dumb terminals and thin clients used for personal computing (such as VDI)"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "O/S",
-                                            "Personal productivity",
-                                            "Office automation",
-                                            "Personal Database"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed services for end user desktops"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Client compute physical desktops, portable laptops, thin client machines, peripherals and associated software used by individuals to perform work.</p><p>A personal computer (aka workstations, desktop systems, or client systems in a client/server configuration) with at least one screen and one input device used by one person at a time, which can run many different applications.</p>"
                             },
@@ -6220,20 +5162,7 @@
                             "parent": "end_user",
                             "name": "mobile_devices",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "mobile_devices",
                                 "examples": [
@@ -6256,46 +5185,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Tablet",
-                                            "Smart Phone",
-                                            "Handheld devices"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "O/S",
-                                            "Mobile Productivity Apps",
-                                            "Mobile Services (e.g. Blackberry Server)"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed services for mobile device."
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Client mobile devices, including smart phones (iOS, Android, Windows Mobile), tablets, and PDAs. A mobile device is a handheld mobile device that is used to deliver end user computing functionality such as email, browsing or media access. Examples of mobile devices are smartphones, tablets, PDAs and palmtops.</p><p>Smartphone: A smartphone is a mobile phone which has email, browsing and media access functionality (e.g. BlackBerry, iPhone, Android HTC phone, Win7 Mobile, etc.).</p><p>Tablet: A tablet is a mobile device that does not have a keyboard or hard drive, (i.e. touch screen only). Examples include the iPad, Samsung Galaxy, Lenovo ThinkPad, HTC Flyer, Sony Tablet etc. Even if the device is used to access common office applications via Citrix, it would still be captured in here.</p><p>If the \u201ctablet\u201d device has an attached keyboard and a hard drive, it should be counted as a laptop in Workspace. Examples include the Tablet PCs from Dell and Lenovo. These devices are essentially next generation laptop replacements and considerably extend the functionality of the devices so that they can be used more easily for word processing, spreadsheet production etc.</p><p>PDA: PDAs (Personal Digital Assistants) are small, handheld computers such as PalmPilots, iPAQs, other Win7 Mobile handhelds, and Psion organizers without phone capability.</p>"
                             },
@@ -6386,34 +5276,7 @@
                             "parent": "end_user",
                             "name": "it_help_desk",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "Desk side Support",
-                                            "2nd level support (Tier 3 & Tier 4) - Defined as resources who have other responsibilities as well as responding to user req"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Desk side Support",
-                                            "2nd level support (Tier 3 & Tier 4) - Defined as resources who have other responsibilities as well as responding to user req"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "it_help_desk",
                                 "examples": [
@@ -6440,45 +5303,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Tier-1 Help Desk - Defined as the resources whose primary role and highest priority is to respond to users\u2019 requests"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Tier-1 Help Desk - Defined as the resources whose primary role and highest priority is to respond to users\u2019 requests"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Specialized monitors",
-                                            "reader boards"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Help Desk/ Ticketing System",
-                                            "Expert knowledge tools",
-                                            "Voice/IVR software",
-                                            "Enterprise system management",
-                                            "ITIL tools including CMDB",
-                                            "Change/Incident/ Problem Mgmt software",
-                                            "Discovery tools"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed services for service desk"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Service Desk (aka Help Desk) are Centralized groups who provide a first point of support to users. Primary role and highest priority is to respond to requests from users.</p><p>Central Service Desks vary in size. They may be as small as two or three agents sharing an extension on a hunt group, or they may be large enough to be managed as a contact center.</p>"
                             },
@@ -6552,19 +5377,7 @@
                             "parent": "application",
                             "name": "app_dev",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ]
-                                    }
-                                ],
+                                "excludes": [],
                                 "kind": "volume",
                                 "description": "<p>Resources involved with the analysis, design, development, code, test and release packaging services associated with application development projects.</p>",
                                 "level": "sub_tower",
@@ -6586,53 +5399,7 @@
                                         "uom": "FTE Days"
                                     }
                                 ],
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Programming staff",
-                                            "testers/QA",
-                                            "DBAs (logical)",
-                                            "project tracking",
-                                            "Planning & process mgmt.",
-                                            "Administration (incl mgmt., training & doc)",
-                                            "Application QA/test staff"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Programming staff",
-                                            "testers/QA",
-                                            "DBAs (logical)",
-                                            "project tracking",
-                                            "Planning & process mgmt.",
-                                            "Administration (incl mgmt., training & doc)",
-                                            "Application QA/test staff"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Dev/Test servers",
-                                            "LPAR usage (mainframe)"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Development tools",
-                                            "Compilers Test tools",
-                                            "Test databases"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Outcome-based consulting project to develop an application.   May be part of an existing application managed service agreement, especially, follow on phases"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "adoption_level": "basic",
                                 "name": "app_dev"
                             },
@@ -6644,20 +5411,7 @@
                             "parent": "application",
                             "name": "app_support_ops",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "app_support_ops",
                                 "examples": [
@@ -6682,39 +5436,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Application support staff"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Application support staff"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Dev/Test servers",
-                                            "LPAR usage (mainframe)"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Support tools, mgmt tools"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed application support services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>The operations, support, fix and minor enhancements associated with existing applications.</p>"
                             },
@@ -6727,44 +5449,7 @@
                             "parent": "application",
                             "name": "business_software",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "business_software",
                                 "examples": [
@@ -6786,15 +5471,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Business software licensing",
-                                            "maintenance & support contracts"
-                                        ],
-                                        "cost_pool": "software"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Software expenditures including licensing, maintenance and support related to off-the-shell software purchases</p>"
                             },
@@ -6807,20 +5484,7 @@
                             "parent": "application",
                             "name": "database",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "database",
                                 "examples": [
@@ -6842,44 +5506,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "DBAs (focused on physical side of DBs)",
-                                            "database planning & architecture",
-                                            "operations & support"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "DBAs (focused on physical side of DBs)",
-                                            "database planning & architecture",
-                                            "operations & support"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Specialized database appliances"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "DBMS software",
-                                            "Database management tools",
-                                            "performance monitoring"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed database infrastructure services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Distributed database services focused on the physical database (versus the logical design) including DBAs, DBMS, tools and operational support.</p>"
                             },
@@ -6892,20 +5519,7 @@
                             "parent": "application",
                             "name": "middleware",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "middleware",
                                 "examples": [
@@ -6929,45 +5543,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Specialized middleware appliances"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Middleware",
-                                            "Application Servers",
-                                            "Enterprise Integration",
-                                            "Web Services"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed application services specifically supporting middleware"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Distributed platform, application and system integration resources enabling cross application development, communications and information sharing.</p>"
                             },
@@ -6980,26 +5556,7 @@
                             "parent": "application",
                             "name": "mainframe_db",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "mainframe_db",
                                 "level": "sub_tower",
@@ -7017,38 +5574,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "DBAs (focused on physical side of DBs)",
-                                            "database planning & architecture",
-                                            "operations & support"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "DBAs (focused on physical side of DBs)",
-                                            "database planning & architecture",
-                                            "operations & support"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "DBMS software",
-                                            "Database management tools",
-                                            "performance monitoring"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed database infrastructure services"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Mainframe database services focused on the physical database (versus the logical design) including the DBAs, DBMS, tools and operational support.</p>"
                             },
@@ -7061,26 +5587,7 @@
                             "parent": "application",
                             "name": "mainframe_middleware",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "mainframe_middleware",
                                 "examples": [
@@ -7101,39 +5608,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Systems analysts/engineers providing technical operations & support",
-                                            "Planning & Process Mgmt",
-                                            "Admin (including mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Middleware",
-                                            "Application Servers",
-                                            "Enterprise Integration",
-                                            "Web Services"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed application services specifically supporting middleware"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Mainframe platform, application and system integration resources enabling cross application development, communications and information sharing</p>"
                             },
@@ -7207,14 +5682,7 @@
                             "parent": "delivery",
                             "name": "ops_center",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "ops_center",
                                 "level": "sub_tower",
@@ -7232,50 +5700,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Tier-2 Operations & Maintenance",
-                                            "Planning & Process Mgmt",
-                                            "Admin (incl mgmt.)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Tier-2 Operations & Maintenance",
-                                            "Planning & Process Mgmt",
-                                            "Admin (incl mgmt.)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Specialized hardware (e.g. large monitors, reader boards, etc.)"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Performance and availability monitoring tools",
-                                            "MOMs"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed services for operations monitoring"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    },
-                                    {
-                                        "list": [
-                                            "NOC/OpCenter facility",
-                                            "Office space (occupancy)"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Centralized IT Operations Center resources including monitoring and intervention e.g. NOC (network operations center), GOC (global operations center).</p>"
                             },
@@ -7288,20 +5713,7 @@
                             "parent": "delivery",
                             "name": "project_mgmt",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "kind": "volume",
                                 "children": [],
                                 "description": "<p>Resources involved with managing and supporting IT-related projects including business and IT-driven initiatives.</p>",
@@ -7319,41 +5731,7 @@
                                         "uom": "FTE-Days"
                                     }
                                 ],
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Program / Project Managers providing project & portfolio planning",
-                                            "oversite & control."
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Program / Project Managers providing project & portfolio planning",
-                                            "oversite & control."
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "PPM",
-                                            "Project Management tools"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Outcome-based consulting project to establish a PMO or project management discipline"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    },
-                                    {
-                                        "list": [
-                                            "Office space (occupancy)"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    }
-                                ],
+                                "includes": [],
                                 "adoption_level": "basic",
                                 "mappings": []
                             },
@@ -7366,32 +5744,7 @@
                             "parent": "delivery",
                             "name": "client_mgmt",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "client_mgmt",
                                 "level": "sub_tower",
@@ -7409,26 +5762,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Account Mgrs / Business Relationship Mgrs providing services to the Business Units."
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Account Mgrs / Business Relationship Mgrs providing services to the Business Units."
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Client / Account Management tools"
-                                        ],
-                                        "cost_pool": "software"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Resources or \u201caccount managers\u201d aligned with the lines of business to understand business needs, communicate IT products, services and status of IT projects.<p>"
                             },
@@ -7473,32 +5807,7 @@
                             "parent": "security_compliance",
                             "name": "security",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "Security hardware specific to tower (ex: Netowrk firewalls)"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Security software specific to tower (ex: encryption software)"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "security",
                                 "examples": [
@@ -7524,44 +5833,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Security Analysts managing security policy",
-                                            "penetration testing",
-                                            "etc."
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Security Analysts managing security policy",
-                                            "penetration testing",
-                                            "etc."
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Specialized hardware"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "Security management software",
-                                            "SSL Certificates",
-                                            "Security investigations Analysis Software"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed services for network security"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>IT Security resources setting policy, establishing process & means, measuring compliance and responding to security breaches. These policy making resources are part of the Security Sub Tower.</p><p>Other operational resources that apply these policies through security configuration and operations should be included in their relevant Resource Tower / Sub-Tower.</p><p>Note: Resources related to network security (e.g. firewalls, intrusion prevention/detection) should be included in the Network Tower and relevant Sub Tower (e.g. WAN/LAN/Voice).</p>"
                             },
@@ -7574,26 +5846,7 @@
                             "parent": "security_compliance",
                             "name": "compliance",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "compliance",
                                 "examples": [
@@ -7615,36 +5868,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Compliance analysts managing compliance policies",
-                                            "control testing",
-                                            "etc."
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Compliance analysts managing compliance policies",
-                                            "control testing",
-                                            "etc."
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Specialized Compliance software such as GRC."
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed services for compliance management."
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>IT Compliance resources setting policy, establishing controls and measuring compliance to relevant legal and compliance requirements.</p>"
                             },
@@ -7657,20 +5881,7 @@
                             "parent": "security_compliance",
                             "name": "disaster_recovery",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "DR equipment specific to tower (ex: Compute Servers dedicated for DR)"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "disaster_recovery",
                                 "examples": [
@@ -7689,39 +5900,7 @@
                                 "uom_list": [],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Resources dedicated to DR planning",
-                                            "coordination",
-                                            "test execution",
-                                            "etc."
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Resources dedicated to DR planning",
-                                            "coordination",
-                                            "test execution",
-                                            "etc."
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Specialized DR software for Business Impact Assessment",
-                                            "Specialized DR software for emergency notification/communication"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Managed services for compliance management."
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>IT Disaster Recovery resources setting DR policy, establishing process & means, dedicated failover facilities, performing DR testing.</p><p>NOTE:  DR designated equipment is included directly in its own sub-tower (e.g. extra servers for DR are included in Compute tower, etc.).</p>"
                             },
@@ -7765,26 +5944,7 @@
                             "parent": "it_mgmt",
                             "name": "it_mgmt_strategic_planning",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "it_mgmt_strategic_planning",
                                 "examples": [
@@ -7808,38 +5968,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "CIO",
-                                            "Office of the CIO",
-                                            "strategic planning",
-                                            "Executive Admins"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "CIO",
-                                            "Office of the CIO",
-                                            "strategic planning",
-                                            "Executive Admins"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "IT Strategic Planning software"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Consulting or SaaS provider"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>IT management and administration resources; typically CIO, senior IT leaders and administrative support including centralized IT strategy and planning.</p>"
                             },
@@ -7852,26 +5981,7 @@
                             "parent": "it_mgmt",
                             "name": "ent_arch",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "ent_arch",
                                 "examples": [
@@ -7892,32 +6002,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Enterprise Architects (Business, Information, Application, Technology)"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Enterprise Architects (Business, Information, Application, Technology)"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Enterprise Architecture Mgmt tools"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Consulting or SaaS provider"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Enterprise architecture services including business, information, application and technical architecture to drive standardization, integration and efficiency among business technology solutions</p>"
                             },
@@ -7930,26 +6015,7 @@
                             "parent": "it_mgmt",
                             "name": "it_finance",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "it_finance",
                                 "examples": [
@@ -7971,36 +6037,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "IT Finance Controller",
-                                            "IT Finance Mgr",
-                                            "IT Financial Analysts providing accounting, budgeting and chargeback services."
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "IT Finance Controller",
-                                            "IT Finance Mgr",
-                                            "IT Financial Analysts providing accounting, budgeting and chargeback services."
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "TBM / ITFM software"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Consulting or SaaS provider"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Resources involved in the planning, budgeting, spend management and chargeback of IT expenditures and the costing of IT products and services.</p>"
                             },
@@ -8013,26 +6050,7 @@
                             "parent": "it_mgmt",
                             "name": "it_vendor_mgmt",
                             "atum_entry": {
-                                "excludes": [
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "hardware"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Telecom"
-                                    },
-                                    {
-                                        "list": [
-                                            "All"
-                                        ],
-                                        "cost_pool": "Facilities & Power"
-                                    }
-                                ],
+                                "excludes": [],
                                 "layer": "it_towers",
                                 "name": "it_vendor_mgmt",
                                 "level": "sub_tower",
@@ -8050,32 +6068,7 @@
                                 ],
                                 "mappings": [],
                                 "adoption_level": "basic",
-                                "includes": [
-                                    {
-                                        "list": [
-                                            "Vendor Manager providing support to new vendor selection process and service/risk management of existing vendors"
-                                        ],
-                                        "cost_pool": "internal labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "Vendor Manager providing support to new vendor selection process and service/risk management of existing vendors"
-                                        ],
-                                        "cost_pool": "external labor"
-                                    },
-                                    {
-                                        "list": [
-                                            "IT Vendor or Contract Management software"
-                                        ],
-                                        "cost_pool": "software"
-                                    },
-                                    {
-                                        "list": [
-                                            "Consulting or SaaS provider"
-                                        ],
-                                        "cost_pool": "Outside Services"
-                                    }
-                                ],
+                                "includes": [],
                                 "children": [],
                                 "description": "<p>Resources involved in the selection, contract management, oversight, performance management and general delivery of services by 3rd party vendors and external service providers</p>"
                             },
@@ -8213,16 +6206,7 @@
                     ],
                     "name": "internal_labor",
                     "atum_entry": {
-                        "excludes": [
-                            {
-                                "list": [
-                                    "equipment",
-                                    "workforce reductions",
-                                    "relocations & retirements"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "excludes": [],
                         "layer": "cost_pools",
                         "name": "internal_labor",
                         "level": "cost_pool",
@@ -8235,21 +6219,7 @@
                         "uom_list": [],
                         "mappings": [],
                         "adoption_level": "basic",
-                        "includes": [
-                            {
-                                "list": [
-                                    "employee wages",
-                                    "base salary",
-                                    "bonuses",
-                                    "benefits",
-                                    "pension",
-                                    "employee taxes",
-                                    "travel & expense",
-                                    "training and occupancy"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "includes": [],
                         "children": [
                             "st_internal_labor",
                             "internal_labor_capital"
@@ -8318,16 +6288,7 @@
                     ],
                     "name": "external_labor",
                     "atum_entry": {
-                        "excludes": [
-                            {
-                                "list": [
-                                    "external service providers labor",
-                                    "deliverable-based projects consultants",
-                                    "statements of work consultants"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "excludes": [],
                         "layer": "cost_pools",
                         "name": "external_labor",
                         "level": "cost_pool",
@@ -8340,16 +6301,7 @@
                         "uom_list": [],
                         "mappings": [],
                         "adoption_level": "basic",
-                        "includes": [
-                            {
-                                "list": [
-                                    "external fees",
-                                    "contractors travel & expenses",
-                                    "staff augmentation and external consultants"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "includes": [],
                         "children": [
                             "st_external_labor",
                             "external_labor_capital"
@@ -8470,21 +6422,7 @@
                     ],
                     "name": "outside_services",
                     "atum_entry": {
-                        "excludes": [
-                            {
-                                "list": [
-                                    "hardware maintenance",
-                                    "software maintenance",
-                                    "temporary staff",
-                                    "contract staff",
-                                    "leased lines",
-                                    "telecommunication services",
-                                    "data subscriptions",
-                                    "outside business functions (BPO) like payroll"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "excludes": [],
                         "layer": "cost_pools",
                         "name": "outside_services",
                         "level": "cost_pool",
@@ -8497,14 +6435,7 @@
                         "uom_list": [],
                         "mappings": [],
                         "adoption_level": "basic",
-                        "includes": [
-                            {
-                                "list": [
-                                    "external service provider IT services"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "includes": [],
                         "children": [
                             "consulting",
                             "managed_service_provider",
@@ -8653,17 +6584,7 @@
                     ],
                     "name": "hardware",
                     "atum_entry": {
-                        "excludes": [
-                            {
-                                "list": [
-                                    "telecom lease lines",
-                                    "property",
-                                    "office space",
-                                    "raised floor facilities"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "excludes": [],
                         "layer": "cost_pools",
                         "name": "hardware",
                         "level": "cost_pool",
@@ -8676,15 +6597,7 @@
                         "uom_list": [],
                         "mappings": [],
                         "adoption_level": "basic",
-                        "includes": [
-                            {
-                                "list": [
-                                    "physical assets",
-                                    "device embedded software"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "includes": [],
                         "children": [
                             "hw_expense",
                             "hw_lease",
@@ -8834,16 +6747,7 @@
                     ],
                     "name": "software",
                     "atum_entry": {
-                        "excludes": [
-                            {
-                                "list": [
-                                    "IaaS",
-                                    "PaaS",
-                                    "SaaS"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "excludes": [],
                         "layer": "cost_pools",
                         "name": "software",
                         "level": "cost_pool",
@@ -8856,18 +6760,7 @@
                         "uom_list": [],
                         "mappings": [],
                         "adoption_level": "basic",
-                        "includes": [
-                            {
-                                "list": [
-                                    "operating systems",
-                                    "middleware",
-                                    "databases",
-                                    "tools and utilities",
-                                    "applications"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "includes": [],
                         "children": [
                             "sw_expense",
                             "sw_subscription",
@@ -9017,15 +6910,7 @@
                     ],
                     "name": "facilities_power",
                     "atum_entry": {
-                        "excludes": [
-                            {
-                                "list": [
-                                    "hardware",
-                                    "software"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "excludes": [],
                         "layer": "cost_pools",
                         "name": "facilities_power",
                         "level": "cost_pool",
@@ -9038,21 +6923,7 @@
                         "uom_list": [],
                         "mappings": [],
                         "adoption_level": "basic",
-                        "includes": [
-                            {
-                                "list": [
-                                    "floor space",
-                                    "power",
-                                    "cooling",
-                                    "utility costs",
-                                    "environmental control",
-                                    "power distribution",
-                                    "rack infrastructure",
-                                    "managing data center environment"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "includes": [],
                         "children": [
                             "fp_expense",
                             "fp_lease",
@@ -9202,17 +7073,7 @@
                     ],
                     "name": "telecom",
                     "atum_entry": {
-                        "excludes": [
-                            {
-                                "list": [
-                                    "switches",
-                                    "routers",
-                                    "firewalls",
-                                    "PBXs"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "excludes": [],
                         "layer": "cost_pools",
                         "name": "telecom",
                         "level": "cost_pool",
@@ -9225,17 +7086,7 @@
                         "uom_list": [],
                         "mappings": [],
                         "adoption_level": "basic",
-                        "includes": [
-                            {
-                                "list": [
-                                    "voice network connectivity circuit",
-                                    "data network connectivity circuit",
-                                    "voice network connectivity usage",
-                                    "data network connectivity usage"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "includes": [],
                         "children": [
                             "tel_expense",
                             "tel_lease",
@@ -9281,14 +7132,7 @@
                     ],
                     "name": "other",
                     "atum_entry": {
-                        "excludes": [
-                            {
-                                "list": [
-                                    "employee taxes"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "excludes": [],
                         "layer": "cost_pools",
                         "name": "other",
                         "level": "cost_pool",
@@ -9301,22 +7145,7 @@
                         "uom_list": [],
                         "mappings": [],
                         "adoption_level": "basic",
-                        "includes": [
-                            {
-                                "list": [
-                                    "non-standard expenses",
-                                    "additoinal taxes",
-                                    "non-data-processing equipement",
-                                    "industry-specific data processing equipement",
-                                    "workforce reductions",
-                                    "relocations",
-                                    "retirements",
-                                    "data subscriptions",
-                                    "outsourced business functions (BPO)"
-                                ],
-                                "cost_pool": "all"
-                            }
-                        ],
+                        "includes": [],
                         "children": [
                             "st_other"
                         ],

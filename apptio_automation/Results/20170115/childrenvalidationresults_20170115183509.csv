@@ -1,0 +1,102 @@
+keyvalue,imagepresent,cloudimage,children,childrenstatus,finalstatus
+business_capabilities,Pass,Pass,No children present in json and application,Pass,Pass
+services,Pass,Pass,No children present in json and application,Pass,Pass
+it_towers,Pass,Pass,"[u'data_center', u'delivery', u'compute', u'it_mgmt', u'security_compliance', u'communication', u'output', u'storage', u'network', u'end_user', u'application']",Pass,Pass
+data_center,Pass,Pass,"[u'other_facilities', u'ent_data_center']",Pass,Pass
+other_facilities,Pass,Pass,No children present in json and application,Pass,Pass
+ent_data_center,Pass,Pass,No children present in json and application,Pass,Pass
+delivery,Pass,Pass,"[u'ops_center', u'client_mgmt', u'project_mgmt', u'cloud_ops']",Pass,Pass
+ops_center,Pass,Pass,No children present in json and application,Pass,Pass
+client_mgmt,Pass,Pass,No children present in json and application,Pass,Pass
+project_mgmt,Pass,Pass,No children present in json and application,Pass,Pass
+cloud_ops,Pass,Pass,No children present in json and application,Pass,Pass
+compute,Pass,Pass,"[u'windows', u'mainframe_middleware', u'linux', u'middleware', u'database', u'cloud_platform', u'converged_infra', u'mainframe', u'cloud_linux', u'unix', u'cloud_windows', u'mainframe_db']",Pass,Pass
+windows,Pass,Pass,No children present in json and application,Pass,Pass
+mainframe_middleware,Pass,Pass,No children present in json and application,Pass,Pass
+linux,Pass,Pass,No children present in json and application,Pass,Pass
+middleware,Pass,Pass,No children present in json and application,Pass,Pass
+database,Pass,Pass,No children present in json and application,Pass,Pass
+cloud_platform,Pass,Pass,No children present in json and application,Pass,Pass
+converged_infra,Pass,Pass,No children present in json and application,Pass,Pass
+mainframe,Pass,Pass,No children present in json and application,Pass,Pass
+cloud_linux,Pass,Pass,No children present in json and application,Pass,Pass
+unix,Pass,Pass,No children present in json and application,Pass,Pass
+cloud_windows,Pass,Pass,No children present in json and application,Pass,Pass
+mainframe_db,Pass,Pass,No children present in json and application,Pass,Pass
+it_mgmt,Pass,Pass,"[u'it_mgmt_strategic_planning', u'ent_arch', u'it_vendor_mgmt', u'it_finance']",Pass,Pass
+it_mgmt_strategic_planning,Pass,Pass,No children present in json and application,Pass,Pass
+ent_arch,Pass,Pass,No children present in json and application,Pass,Pass
+it_vendor_mgmt,Pass,Pass,No children present in json and application,Pass,Pass
+it_finance,Pass,Pass,No children present in json and application,Pass,Pass
+security_compliance,Pass,Pass,"[u'security', u'compliance', u'disaster_recovery', u'cloud_dr']",Pass,Pass
+security,Pass,Pass,No children present in json and application,Pass,Pass
+compliance,Pass,Pass,No children present in json and application,Pass,Pass
+disaster_recovery,Pass,Pass,No children present in json and application,Pass,Pass
+cloud_dr,Pass,Pass,No children present in json and application,Pass,Pass
+communication,Pass,Pass,"[u'circuits', u'usage']",Pass,Pass
+circuits,Pass,Pass,No children present in json and application,Pass,Pass
+usage,Pass,Pass,No children present in json and application,Pass,Pass
+output,Pass,Pass,"[u'post_processing', u'central_print']",Pass,Pass
+post_processing,Pass,Pass,No children present in json and application,Pass,Pass
+central_print,Pass,Pass,No children present in json and application,Pass,Pass
+storage,Pass,Pass,"[u'tier_2', u'cloud_storage', u'tier_4', u'cloud_archive', u'tier_3', u'tier_1']",Pass,Pass
+tier_2,Pass,Pass,No children present in json and application,Pass,Pass
+cloud_storage,Pass,Pass,No children present in json and application,Pass,Pass
+tier_4,Pass,Pass,No children present in json and application,Pass,Pass
+cloud_archive,Pass,Pass,No children present in json and application,Pass,Pass
+tier_3,Pass,Pass,No children present in json and application,Pass,Pass
+tier_1,Pass,Pass,No children present in json and application,Pass,Pass
+network,Pass,Pass,"[u'lan', u'voice', u'other_network', u'wan', u'cloud_network']",Pass,Pass
+lan,Pass,Pass,No children present in json and application,Pass,Pass
+voice,Pass,Pass,No children present in json and application,Pass,Pass
+other_network,Pass,Pass,No children present in json and application,Pass,Pass
+wan,Pass,Pass,No children present in json and application,Pass,Pass
+cloud_network,Pass,Pass,No children present in json and application,Pass,Pass
+end_user,Pass,Pass,"[u'cloud_desktop', u'service_desk', u'workspace', u'field_support', u'mobile_devices']",Pass,Pass
+cloud_desktop,Pass,Pass,No children present in json and application,Pass,Pass
+service_desk,Pass,Pass,No children present in json and application,Pass,Pass
+workspace,Pass,Pass,No children present in json and application,Pass,Pass
+field_support,Pass,Pass,No children present in json and application,Pass,Pass
+mobile_devices,Pass,Pass,No children present in json and application,Pass,Pass
+application,Pass,Pass,"[u'app_dev', u'lob_software', u'cloud_apps', u'app_support_ops']",Pass,Pass
+app_dev,Pass,Pass,No children present in json and application,Pass,Pass
+lob_software,Pass,Pass,No children present in json and application,Pass,Pass
+cloud_apps,Pass,Pass,No children present in json and application,Pass,Pass
+app_support_ops,Pass,Pass,No children present in json and application,Pass,Pass
+cost_pools,Pass,Pass,"[u'outside_services', u'other', u'external_labor', u'hardware', u'software', u'telecom', u'facilities_power', u'internal_labor']",Pass,Pass
+outside_services,Pass,Pass,"[u'os_depreciation', u'managed_service_provider', u'cloud_service_provider', u'consulting', u'os_capital']",Pass,Pass
+os_depreciation,Pass,Pass,No children present in json and application,Pass,Pass
+managed_service_provider,Pass,Pass,No children present in json and application,Pass,Pass
+cloud_service_provider,Pass,Pass,No children present in json and application,Pass,Pass
+consulting,Pass,Pass,No children present in json and application,Pass,Pass
+os_capital,Pass,Pass,No children present in json and application,Pass,Pass
+other,Pass,Pass,[u'st_other'],Pass,Pass
+st_other,Pass,Pass,No children present in json and application,Pass,Pass
+external_labor,Pass,Pass,[u'st_external_labor'],Pass,Pass
+st_external_labor,Pass,Pass,No children present in json and application,Pass,Pass
+hardware,Pass,Pass,"[u'hw_capital', u'hw_depreciation', u'hw_lease', u'hw_maintenance_support', u'hw_expense']",Pass,Pass
+hw_capital,Pass,Pass,No children present in json and application,Pass,Pass
+hw_depreciation,Pass,Pass,No children present in json and application,Pass,Pass
+hw_lease,Pass,Pass,No children present in json and application,Pass,Pass
+hw_maintenance_support,Pass,Pass,No children present in json and application,Pass,Pass
+hw_expense,Pass,Pass,No children present in json and application,Pass,Pass
+software,Pass,Pass,"[u'sw_lease', u'sw_maintenance_support', u'sw_capital', u'sw_depreciation', u'sw_expense']",Pass,Pass
+sw_lease,Pass,Pass,No children present in json and application,Pass,Pass
+sw_maintenance_support,Pass,Pass,No children present in json and application,Pass,Pass
+sw_capital,Pass,Pass,No children present in json and application,Pass,Pass
+sw_depreciation,Pass,Pass,No children present in json and application,Pass,Pass
+sw_expense,Pass,Pass,No children present in json and application,Pass,Pass
+telecom,Pass,Pass,"[u'tel_expense', u'tel_capital', u'tel_lease', u'tel_maintenance', u'tel_depreciation']",Pass,Pass
+tel_expense,Pass,Pass,No children present in json and application,Pass,Pass
+tel_capital,Pass,Pass,No children present in json and application,Pass,Pass
+tel_lease,Pass,Pass,No children present in json and application,Pass,Pass
+tel_maintenance,Pass,Pass,No children present in json and application,Pass,Pass
+tel_depreciation,Pass,Pass,No children present in json and application,Pass,Pass
+facilities_power,Pass,Pass,"[u'fp_maintenance_support', u'fp_lease', u'fp_expense', u'fp_capital', u'fp_depreciation']",Pass,Pass
+fp_maintenance_support,Pass,Pass,No children present in json and application,Pass,Pass
+fp_lease,Pass,Pass,No children present in json and application,Pass,Pass
+fp_expense,Pass,Pass,No children present in json and application,Pass,Pass
+fp_capital,Pass,Pass,No children present in json and application,Pass,Pass
+fp_depreciation,Pass,Pass,No children present in json and application,Pass,Pass
+internal_labor,Pass,Pass,[u'st_internal_labor'],Pass,Pass
+st_internal_labor,Pass,Pass,No children present in json and application,Pass,Pass

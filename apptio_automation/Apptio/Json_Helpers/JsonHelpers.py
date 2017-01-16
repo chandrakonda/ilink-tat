@@ -98,7 +98,8 @@ class JsonHelpers():
                     elif key_value == "uom_list":
                         for uomlist in child[key_value]:  # for each UOM dictionary in the UOM list
                             for k, v in uomlist.items():
-                                __value_list.append(k + ": " + v)
+                                __uom_val = k + ": " + v
+                                __value_list.append(__uom_val.strip())
                     elif key_value == "children":
                         for children_name in json_data_object[key_value]:  # for each child in the list,
                             __value_list.append(children_name["label"])  # get label name

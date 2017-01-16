@@ -1,5 +1,6 @@
 import pytest,sys,os,traceback,pdb,json
 from time import localtime, strftime
+from _pytest.runner import runtestprotocol
 # from Framework.Environment_setup import LoadTestData,PageElements,EnvironmentSetup , dict_cleanup
 
 
@@ -23,10 +24,12 @@ def pytest_cmdline_preparse(args):
     if not os.path.exists(__folder_path):
         os.makedirs(__folder_path)
     val = args
-    __val = "--html={}\\{}.html".format(__folder_path,__local_var_current_date_time)
+    #pdb.set_trace()
+    #__val = "--html={}\\{}.html".format(__folder_path,__local_var_current_date_time)
+    __val = "--excelreport={}\\{}.xlsx".format(__folder_path,__local_var_current_date_time)
     val[0] = __val
     args = val
-    #pdb.set_trace()
+
 
 
 #########################################################################################
@@ -48,6 +51,16 @@ def json_data(request,jsonfileversion):
     file_name = os.path.join(__local_automation_path, "Jsonfiles",__json_file_name)
     with open(file_name) as data_file:
         yield json.load(data_file)
+
+# to show test case name and result in log. We need to import runtestprotocol package
+# def pytest_runtest_protocol(item, nextitem):
+#     reports = runtestprotocol(item, nextitem=nextitem)
+#     for report in reports:
+#         if report.when == 'call':
+#             print("\n ####################")
+#             print ('\n%s --- %s' % (item.name, report.outcome))
+#            # print(report.outcome.test_result)
+#    return True
 
 
 def pytest_addoption(parser):

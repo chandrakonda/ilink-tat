@@ -106,6 +106,10 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
         try:
             local_element = cls.get_elements_in_list(element_identifier_name,format_value)
             for ele in local_element: # for each element in the list
+                try:
+                    ele.location_once_scrolled_into_view
+                except:
+                    pass
                 __var_val.append(ele.text)  # get the text of the element
             cls.log.info("Value returned from the application is '{}'".format(str(len(__var_val))))
             return __var_val
@@ -155,8 +159,6 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
         except Exception as c:
             cls.log.exception("Exception thrown in 'get_innerHtml_for_given_element' method '{}' ".format(c))
             raise c
-
-
 
     @classmethod
     def click_on_element_format(cls,element_identifier_name,value_to_format=None):
@@ -302,9 +304,7 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
             by = Page_elements().get_element_identifier(element_identifier_name)
             by = eval(by)
             __val2 = by[1]
-            if value_to_format == None : # check if there is an option to format
-                pass
-            else:
+            if value_to_format != None : # check if there is an option to format
                 by[1] = __val2.format(value_to_format)
 
             if (__obj_wait_extension.Wait_for_element_visible(by, 10)):
@@ -402,6 +402,14 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
         cls.log.info("Scroll to element '{}'".format(element_identifier_name))
 
     @classmethod
+    def scroll_to_element_using_x_y_coordinates(cls,element):
+        try:
+            __scroll_script = "window.scrollTo({},{});".format(element.location["x"], element.location["y"])
+            cls.get_driver().execute_script(__scroll_script)
+        except:
+            raise
+
+    @classmethod
     def wait_for(cls,element_identifier_name):
         try:
             element = cls.get_web_element(element_identifier_name)
@@ -447,9 +455,7 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
             by = Page_elements().get_element_identifier(element_identifier_name)
             by = eval(by)
             __val2 = by[1]
-            if value_to_format == None :
-                cls.log.info("Identifier value is..".format(__val2))
-            else:
+            if value_to_format != None :
                 by[1] = __val2.format(value_to_format)
                 cls.log.info("Formatted value of the by is '{}' ".format(by[1]))
             element = cls.get_driver().find_element(eval(by[0]), by[1])
@@ -457,7 +463,7 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
             cls.log.info("'Is displayed' value of '{}' is '{}'".format(element_identifier_name,__is_displayed))
             return __is_displayed
         except Exception:
-            cls.log.exception("Element is not displayed so returning False")
+            cls.log.exception("'{}' Element is not displayed so returning False".format(element_identifier_name))
             return False
 
     @classmethod
@@ -468,6 +474,14 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
         except Exception:
             cls.log.info("Element is not enabled so returning False")
             return False
+
+    @classmethod
+    def is_text_available(cls,element_identifier_name):
+        try:
+            element = cls.get_web_element(element_identifier_name)
+            return element.text
+        except:
+            return None
     @classmethod
     def get_attribute_value(cls,element_identifier_name,attribute_name):
         try:
@@ -498,7 +512,8 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
                 by[1] = __val2.format(value_to_format)
                 elements = cls.get_driver().find_elements(eval(by[0]),by[1])
                 for element in elements:
-                    __local_value_list.append(element.get_attribute(attribute_name))
+                    __loc_val = element.get_attribute(attribute_name)
+                    __local_value_list.append(__loc_val.strip())
             return __local_value_list
         except webdriver_exceptions.NoSuchElementException as e:
             cls.log.exception("Exception thrown in 'get_attribute_value_of_element' method {}".format(e))
