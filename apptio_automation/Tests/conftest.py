@@ -10,26 +10,29 @@ from _pytest.runner import runtestprotocol
 #Fixture to modify command line arguments for updating result path
 #########################################################################################
 # --html=c:\workingdirectory\att\sample3.html
-#pdb.set_trace()
-def pytest_cmdline_preparse(args):
-    get_current_time = None
-    if 'time' in sys.modules:
-        import time
-        now = time.localtime(time.time())
-        __local_automation_path = os.path.abspath(os.path.join(os.path.dirname("__file__")))
-        __local_var_folder = time.strftime("%Y%m%d", now)
-        __local_var_current_date_time = time.strftime("%Y%m%d%H%M%S", now)
-        __folder_path = os.path.join(__local_automation_path,"Results",__local_var_folder)
 
-    if not os.path.exists(__folder_path):
-        os.makedirs(__folder_path)
-    val = args
-    #pdb.set_trace()
-    #__val = "--html={}\\{}.html".format(__folder_path,__local_var_current_date_time)
-    __val = "--excelreport={}\\{}.xlsx".format(__folder_path,__local_var_current_date_time)
-    val[0] = __val
-    args = val
+# def pytest_cmdline_preparse(args):
+#     get_current_time = None
+#     if 'time' in sys.modules:
+#         import time
+#         now = time.localtime(time.time())
+#         __local_automation_path = os.path.abspath(os.path.join(os.path.dirname("__file__")))
+#         __local_var_folder = time.strftime("%Y%m%d", now)
+#         __local_var_current_date_time = time.strftime("%Y%m%d%H%M%S", now)
+#         __folder_path = os.path.join(__local_automation_path,"Results",__local_var_folder)
+#
+#     if not os.path.exists(__folder_path):
+#         os.makedirs(__folder_path)
+#     val = args
+#     #pdb.set_trace()
+#     #__val = "--html={}\\{}.html".format(__folder_path,__local_var_current_date_time)
+#     __val = "--excelreport={}\\AutomationResults_{}.xlsx".format(__folder_path,__local_var_current_date_time)
+#     val[0] = __val
+#     args = val
 
+@pytest.fixture(autouse=True)
+def _environment(request):
+    request.config._environment.append(('foo', 'bar'))
 
 
 #########################################################################################
@@ -52,6 +55,15 @@ def json_data(request,jsonfileversion):
     with open(file_name) as data_file:
         yield json.load(data_file)
 
+#
+#
+def pytest_addoption(parser):
+    parser.addoption("--jsonfileversion")
+
+@pytest.fixture(scope="session")
+def jsonfileversion(request):
+    return request.config.getoption("--jsonfileversion")
+
 # to show test case name and result in log. We need to import runtestprotocol package
 # def pytest_runtest_protocol(item, nextitem):
 #     reports = runtestprotocol(item, nextitem=nextitem)
@@ -61,16 +73,6 @@ def json_data(request,jsonfileversion):
 #             print ('\n%s --- %s' % (item.name, report.outcome))
 #            # print(report.outcome.test_result)
 #    return True
-
-
-def pytest_addoption(parser):
-    parser.addoption("--jsonfileversion")
-
-@pytest.fixture(scope="session")
-def jsonfileversion(request):
-    return request.config.getoption("--jsonfileversion")
-
-
 
 # #########################################################################################
 

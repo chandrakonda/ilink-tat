@@ -1,3 +1,38 @@
+import pytest,pdb,csv
+from apptio_automation.Framework.Utils.Json_Helpers import JsonHelpers
+class Test_temp():
+    #pdb.set_trace()
+    # def test_1_sample(self):
+    #     print("test1")
+    #
+    # def test_2_sample(self):
+    #     print("test1")
+    #
+    #
+    # def test_3_sample(self):
+    #     print("test1")
+
+
+    def test_get_json_data(self,json_data):
+        a = JsonHelpers()
+        val = json_data["children"]
+        name = ""
+        for x in range(0,len(val)):
+            name = val[x]["id"] + ","
+            if "children" in val[x]:
+                print(name)
+                if len(val[x]["children"]) > 0:
+                    a.get_child_ids_recursively_list(val[x],name)
+            name = ""
+        final_name_list = getattr(a,"child_names_list")
+        with open('.\\Results\\filename6.csv', 'wb') as myfile:
+            wr = csv.writer(myfile,delimiter = ',')
+            for row in final_name_list:
+                wr.writerows([x.split(',') for x in row])
+
+
+
+
 # import pytest, traceback, time, pdb
 # from pprint import pprint
 # from apptio_automation.Apptio.Json_Helpers.JsonHelpers import JsonHelpers

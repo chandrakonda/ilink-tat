@@ -12,7 +12,7 @@ import apptio_automation.Framework.Extensions.Custom_logger as  cl
 
 
 import traceback
-class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
+class ElementExtensions(Page_elements,Env_setup):
     log = cl.customLogger(logging.DEBUG)
     @classmethod
     def get_web_element(cls,element_identifier_name):
@@ -20,16 +20,31 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
             by = Page_elements().get_element_identifier(element_identifier_name)
             by = eval(by)
             __obj_wait = WaitExtensions()
-            __element = __obj_wait.Wait_for_element_visible(by, 1)
-            cls.log.info(" '{}' Element is identified".format(element_identifier_name))
-            return __element
-            #return __obj_wait.Wait_for_element_visible(by,10) #  cls.Wait_for_element_visible()
+            return __obj_wait.Wait_for_element_visible(by,1)
         except webdriver_exceptions.NoSuchElementException as e:
             cls.log.exception("Exception thrown in 'get_web_element' method '{}' ".format(e))
             raise
         except webdriver_exceptions.WebDriverException as e:
             cls.log.exception("Exception thrown in 'get_web_element' method '{}' ".format(e))
             raise
+    @classmethod
+    def find_element_using_parent_element(cls,parent_element,element_identifier_name):
+        try:
+            by = Page_elements().get_element_identifier(element_identifier_name)
+            by = eval(by)
+            return parent_element.find_element_by_xpath(by[1])
+        except webdriver_exceptions.WebDriverException as e:
+            cls.log.exception("Exception thrown in 'get_web_element' method '{}' ".format(e))
+
+    @classmethod
+    def find_elements_using_parent_element(cls,parent_element,element_identifier_name):
+        try:
+            by = Page_elements().get_element_identifier(element_identifier_name)
+            by = eval(by)
+            return parent_element.find_elements((eval(by[0]),by[1]))
+        except webdriver_exceptions.WebDriverException as e:
+            cls.log.exception("Exception thrown in 'get_web_element' method '{}' ".format(e))
+
 
     @classmethod
     def get_web_element_format(cls, element_identifier_name,value_to_format):
@@ -38,11 +53,10 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
             by = Page_elements().get_element_identifier(element_identifier_name)
             by = eval(by)
             __val2 = by[1]
-            if value_to_format == None :
-                pass
-            else:
+            if value_to_format != None :
                 by[1] = __val2.format(value_to_format)
-            return __obj_wait_extensions.Wait_for_element_visible(by, 10)
+            __ele_ = __obj_wait_extensions.Wait_for_element_visible(by, 10)
+            return __ele_
         except webdriver_exceptions.NoSuchElementException as e:
             cls.log.exception("Exception thrown in 'get_web_element_format' method '{}' ".format(e))
             raise
@@ -76,9 +90,13 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
     def set_text(cls,element_identifier_name,text_to_be_entered):
         try:
             local_element = cls.get_web_element(element_identifier_name)
-            local_element.clear()
-            local_element.send_keys(text_to_be_entered)
-            cls.log.info("Input text '{}' in the field '{}' is successful ".format(text_to_be_entered,element_identifier_name))
+            if local_element != False:
+                local_element.clear()
+                local_element.send_keys(text_to_be_entered)
+                cls.log.info("Input text '{}' in the field '{}' is successful ".format(text_to_be_entered,
+                                                                                       element_identifier_name))
+            else:
+                raise webdriver_exceptions.NoSuchElementException("Unable to find element with given identifier {}".format(element_identifier_name))
         except webdriver_exceptions.NoSuchElementException as k:
             cls.log.exception("Exception thrown in 'set_text' method '{}' ".format(k))
             raise k
@@ -175,8 +193,7 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
                 #element = cls.get_driver().find_element(eval(by[0]), by[1])  # find element
                 # action_chains.ActionChains(Env_setup.get_driver()).move_to_element(element).perform()  #scroll to element
                 # element.click() # click on element
-                browser = cls.driver_type
-                cls.click_on_element_based_on_browser(browser,element)
+                cls.click_on_element_based_on_browser(element)
                 cls.log.info("Click on element '{}' is successful ".format(element_identifier_name))
             else:
                 cls.log.info("Element '{}' is not identified ".format(element_identifier_name))
@@ -187,7 +204,8 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
             raise f
 
     @classmethod
-    def click_on_element_based_on_browser(cls,browser,web_element):
+    def click_on_element_based_on_browser(cls,web_element):
+        browser = cls.driver_type
         try:
             if browser.lower() == 'firefox':
                 web_element.click()
@@ -230,11 +248,11 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
     def click_on_element(cls,element_identifier_name):
         try:
             local_element = cls.get_web_element(element_identifier_name)
-            if cls.driver_type.lower() != 'firefox':
-                action_chains.ActionChains(Env_setup.get_driver()).move_to_element(local_element).perform()
-            local_element.click()
-            cls.log.info("Click on element '{}' is successful ".format(element_identifier_name))
-            #print
+            if local_element != False:
+                local_element.click()
+                cls.log.info("Click on element '{}' is successful ".format(element_identifier_name))
+            else:
+                raise webdriver_exceptions.NoSuchElementException
         except webdriver_exceptions.NoSuchElementException as b:
             cls.log.exception("Exception thrown in 'click_on_element' method '{}' ".format(b))
             raise b
@@ -266,15 +284,15 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
         try:
             category_element = cls.get_web_element_format("category_text_element",element_id_value)
             image_element_for_selected_category = "g[id='{}'] g".format(element_id_value)
-            browser = cls.driver_type
-            cls.click_on_element_based_on_browser(browser, category_element)
+
+            cls.click_on_element_based_on_browser(category_element)
             __val1 = "g[id='{}'] rect".format(element_id_value)
             __element_class_value = cls.get_driver().find_element_by_css_selector(__val1).get_attribute("class")
             cls.log.info("Attribute value of the class is '{}'".format(__element_class_value))
             if __element_class_value != 'atumRectSelected':
                 __tspan_elements = category_element.find_elements_by_css_selector("tspan")
                 if len(__tspan_elements) > 1:
-                    if browser.lower() == 'chrome':
+                    if cls.driver_type.lower() == 'chrome':
                         cls.get_driver().execute_script(
                             "var evt = document.createEvent('MouseEvents');" + "evt.initMouseEvent('click',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);" + "arguments[0].dispatchEvent(evt);",
                             __tspan_elements[0])
@@ -410,12 +428,32 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
             raise
 
     @classmethod
+    def scroll_to_element_using_java_script(cls, web_element):
+        try:
+            cls.get_driver().execute_script('arguments[0].scrollTop = arguments[0].scrollHeight', web_element)
+        except:
+            raise
+
+    @classmethod
+    def scroll_to_web_element_location(cls,web_element):
+        try:
+            web_element.location_once_scrolled_into_view
+        except:
+            raise
+
+
+########################################################################################################################
+# Waits for Element to be visible
+# Implicit Wait is used here
+########################################################################################################################
+
+    @classmethod
     def wait_for(cls,element_identifier_name):
         try:
-            element = cls.get_web_element(element_identifier_name)
+            by = Page_elements().get_element_identifier(element_identifier_name)
             __obj_wait = WaitExtensions()
             cls.log.info("Waiting for the object.... '{}'".format(element_identifier_name))
-            if __obj_wait.Wait_for_element(element,10):
+            if __obj_wait.Wait_for_element_visible(eval(by),10) != False:
                 pass
             else:
                 raise webdriver_exceptions.NoSuchElementException
@@ -423,6 +461,9 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
             cls.log.exception("Exception thrown in 'Wait_for' method '{}'".format(e))
             raise e
 
+########################################################################################################################
+
+########################################################################################################################
     @classmethod
     def close_browser(cls):
         Env_setup.get_driver().close()
@@ -496,6 +537,11 @@ class ElementExtensions(Page_elements,WaitExtensions,Env_setup):
     @classmethod
     def get_attribute_value_of_element(cls,web_element,attribute_name):
         try:
+            try:
+                web_element.location_once_scrolled_into_view
+            except:
+                pass
+            cls.scroll_to_element_using_java_script(web_element)
             return web_element.get_attribute(attribute_name)
         except Exception as e:
             cls.log.exception("Exception thrown in 'get_attribute_value_of_element' method {}".format(e))

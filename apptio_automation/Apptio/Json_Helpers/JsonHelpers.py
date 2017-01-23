@@ -34,51 +34,7 @@ class JsonHelpers():
         except:
             return False
 
-    def get_atum_entry_details(self,json_data_object,application_header_list_values):
-        __json_atum_entry_values = {}
-        const = Constant_Values()
-        child = json_data_object["atum_entry"]
-        try:
-            for x in range(0,len(application_header_list_values)):  # need to change based on the constant file
-                application_header_value = application_header_list_values[x]
-                if application_header_value == "":
-                    key_value = const.app_to_json_mapping["Description"] # get the json key value from constant file
-                    __json_atum_entry_values["Description"] = unicode(child[key_value]) # add the description details
-                elif application_header_value == "Target Users":
-                    key_value = const.app_to_json_mapping["Target Users"] # get the json key value from constant file
-                    __users_list = [x.strip() for x in child[key_value][0]["users"]]  # trim the extra spaces in the list
-                    __json_atum_entry_values["Target Users"] = __users_list # add the list to the json dictionary
-                elif application_header_value == "Unit of Measure List":
-                    __uom_list = []
-                    key_value = const.app_to_json_mapping["Unit of Measure List"]  # get the json key value from constant file
-                    for uomlist in child[key_value]: # for each UOM dictionary in the UOM list
-                        for k,v in uomlist.items():
-                            __uom_list.append(k+": "+v)
-                    __json_atum_entry_values["Unit of Measure List"] = __uom_list
-                elif application_header_value == "Children":
-                    __child_label_list = []
-                    key_value = const.app_to_json_mapping["Children"]  # get the json key value from constant file
-                    for children_name in json_data_object[key_value]: # for each child in the list,
-                        __child_label_list.append(children_name["label"])  # get label name
-                    __json_atum_entry_values["Children"] = __child_label_list  # add values to dictionary
-                elif application_header_value == "Service Offering Levers":
-                    key_value = const.app_to_json_mapping["Service Offering Levers"]  # get the json key value from constant file
-                    __services_list = [x.strip() for x in child[key_value]]
-                    __json_atum_entry_values["Service Offering Levers"] = __services_list # add values to dictionary
-                elif application_header_value == "Service Level KPIs":
-                    key_value = const.app_to_json_mapping["Service Level KPIs"]  # get the json key value from constant file
-                    __kpi_list = [x.strip() for x in child[key_value]]
-                    __json_atum_entry_values["Service Level KPIs"] = __kpi_list # add values to dictionary
-                # elif application_header_value == "Examples":
-                #     pass
-                #     # pending, need to know how to handle values like below. need to check
-                #     # "examples": [
-                #     #     "AWS \u2013 Lambda",
-                #     #     "Azure \u2013 Batch"
-                #     # ]
-        except:
-            raise
-        return __json_atum_entry_values
+
 
     def get_atum_entry_details1(self, json_data_object, application_header_list_values):
         __json_atum_entry_values = {}
@@ -125,3 +81,48 @@ class JsonHelpers():
         except Exception:
             print("could not find keys")
             return 0
+
+    def get_excludes_and_includes(self,json_data_object, application_header_list_values):
+        __json_include_exclude_values = {}
+        const = Constant_Values()
+        child = json_data_object["atum_entry"]
+        try:
+            for x in range(0, len(application_header_list_values)):  # need to change based on the constant file
+                application_header_value = application_header_list_values[x]
+
+                if "Includes" in application_header_value:
+                    __value_list = []
+                    key = application_header_value.keys()
+                    for includelist in child["includes"]:
+                        __parentname = application_header_value[key[0]][1]
+                        __name = application_header_value[key[0]][2]
+                        if __parentname in includelist:
+                            if includelist[__parentname] == __name:
+                                __value_list = __value_list + includelist['list']
+
+                    __json_include_exclude_values[application_header_value[key[0]][0]] = __value_list
+
+                elif "Excludes" in application_header_value:
+                    __value_list = []
+                    key = application_header_value.keys()
+                    for list in child["excludes"]:
+                        __parentname = application_header_value[key[0]][1]
+                        __name = application_header_value[key[0]][2]
+                        if __parentname in list:
+                            if list[__parentname] == __name:
+                                __value_list = __value_list + list['list']
+
+                    __json_include_exclude_values[application_header_value[key[0]][0]] = __value_list
+        except:
+            raise
+        return __json_include_exclude_values
+
+    def get_include_and_excludes_from_json(self,json_data_object):
+        try:
+            pass
+            _include_list = json_data_object["atum_entry"]["includes"]
+            _exlcude_list = json_data_object["atum_entry"]["excludes"]
+            _include_list1 = _include_list + _exlcude_list
+            return _include_list1
+        except:
+            return []

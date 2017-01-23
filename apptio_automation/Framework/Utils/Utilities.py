@@ -23,7 +23,7 @@ def load_data_into_dict(project_folder,application_folder_name,folder_name,file_
     __dict_elements = {}
     try:
         var_parser_file = os.path.normpath(os.path.join(project_folder,application_folder_name, folder_name, file_name + ".txt"))
-        print "config file path is ",var_parser_file
+        print ("config file path is ",var_parser_file)
         __read_file = Return_parser()
         __var_Parser= __read_file.return_config_parser()
         __var_Parser.read(var_parser_file)
@@ -56,3 +56,30 @@ def compare_dict(d1, d2):
     modified = {o: (d1[o], d2[o]) for o in intersect_keys if d1[o] != d2[o]}
     same = set(o for o in intersect_keys if d1[o] == d2[o])
     return added, removed, modified, same
+
+def compare_list_symmetric(list1,list2):
+    same = {}
+    modified = set(list1).symmetric_difference(set(list2))
+    if bool(modified):
+        return modified,same
+    else:
+        return modified,same
+def compare_list_of_dictionaries(list1,list2):
+    pair = zip(list1,list2)
+    diff = [[(k) for k in x if x[k] != y[k]] for x, y in pair if x != y]
+    pair1 = zip(list1,list2)
+    same = [[(k, x[k], y[k]) for k in x if x[k] == y[k]] for x, y in pair1 if x == y]
+    return diff , same
+
+def compare_list_of_dictionaries1(list1,list2):
+    same_list = []
+    modified_list = []
+    if len(list1) == len(list2):
+        for x in range(0,len(list1)):
+            added, removed, modified, same= compare_dict(list1[x],list2[x])
+            if bool(modified):
+                modified_list.append(modified)
+            same_list.append(same)
+        return modified_list,same_list
+    else:
+        pass

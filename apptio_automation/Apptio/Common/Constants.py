@@ -15,5 +15,5 @@ class Constant_Values:
         "Service Offering Levers":"service_offering_levers"
     }
 
-    children_validation_col_list = ["keyvalue", "imagepresent", "cloudimage", "children", "childrenstatus","finalstatus"]
+    children_validation_col_list = ["Key_value", "Imagepresent", "Cloudimagepresent", "Childlist", "Childrenmatching","FinalStatus"]
     detail_validation_col_list = ['Top Level', 'Current Testing Node', 'Matching Keys', 'Non Matching Keys', 'Status']

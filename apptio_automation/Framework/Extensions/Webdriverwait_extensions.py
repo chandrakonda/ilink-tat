@@ -12,7 +12,6 @@ class WaitExtensions(Env_setup):
     log = cl.customLogger(logging.DEBUG)
     # wait for element to visible
     def Wait_for_element_visible(self,by,waitTime_seconds):
-        self.log.info("Waiting for element '{}' to be visible".format(by))
         try:
             driver = self.get_driver()
             wait  = WebDriverWait(driver,int(waitTime_seconds))

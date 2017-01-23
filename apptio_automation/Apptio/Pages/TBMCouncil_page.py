@@ -111,25 +111,25 @@ class TbmCouncilPage(element,JsonHelpers):
 
     def check_for_public_cloud_in_application_and_json(self, json_object, col_id_value): # need to return only one value
         __jsonhelp = JsonHelpers()
-        __val = __jsonhelp.check_for_public_cloud_in_json(json_object) # check json
-        if __val:
-            print("public cloud is present in json for id '{}'".format(col_id_value))
-            if element.is_element_displayed_format("cloud_image_element", col_id_value): # application
-                return True, True
-            else:
-                print("Cloud image is not present in application for id '{}'".format(col_id_value))
-                return True,False
-        else:
-            # need to add
-            return True,True
-################################3################################3################################################################3
-# Validate images and children for each category
+        __cloud_json = __jsonhelp.check_for_public_cloud_in_json(json_object) # check json
+        __cloud_app = element.is_element_displayed_format("cloud_image_element", col_id_value)
 
-    def validate_cloud_details_images_and_children_for_category(self,json_data):
+        if __cloud_json and __cloud_app:
+            return True
+        elif not __cloud_json and not __cloud_app:
+            return True
+        else:
+            return False
+
+################################3#######################################################################################
+# Function to validate images and children for each category
+################################3#######################################################################################
+
+    def validate_cloud_details_images_and_children_for_category(self,json_data,col1_id_list):
         image_col_no = 0
         col_no = 0
         try:
-            col1_id_list, col1_value_list = self.check_and_get_category_values(col_no)
+            #col1_id_list, col1_value_list = self.check_and_get_category_values(col_no)
             self.validate_image_and_children(col1_id_list, json_data, col_no+1, image_col_no)
         except:
             raise
@@ -139,69 +139,87 @@ class TbmCouncilPage(element,JsonHelpers):
             for x in range(0, len(col1_id_list)):
                 __dic_ = {}
                 __local_col1_child1 = json_data["children"][x]
-                __dic_["keyvalue"] = col1_id_list[x][4:]
+                keyval = col1_id_list[x][4:]
 
                 self.click_on_child_element(col1_id_list[x])  # click on child element
                 ###################################################################################
 
-                if self.check_image_for_category(col1_id_list[x]):
-                    __dic_["imagepresent"] = "Pass"
+                imagepresent =  self.check_image_for_category(col1_id_list[x])
 
-                _cloud_json,_cloud_app = self.check_for_public_cloud_in_application_and_json(__local_col1_child1, col1_id_list[x])  # check for cloud image
-                if _cloud_json and _cloud_app :
-                    __dic_["cloudimage"] = "Pass"
-                else:
-                    __dic_["cloudimage"] = "Fail"
+                cloudimage = self.check_for_public_cloud_in_application_and_json(__local_col1_child1, col1_id_list[x])  # check for cloud image
+
                 ###################################################################################
                 ## Click on on next child item
                 col2_id_list, col2_value_list = self.check_and_get_category_values(col_no)  # check and get child count in col2 from app
                 __local_json_col2_child_list = self.get_child_names_in_list(__local_col1_child1)  # json child count in col2
 
-                if __local_json_col2_child_list == col2_value_list and len(__local_json_col2_child_list) != 0 and len(col2_value_list) != 0:  # if child2 in json and app are matching
-                    __dic_["children"] = __local_json_col2_child_list
-                    __dic_["childrenstatus"] = "Pass"
-                    if __dic_["childrenstatus"] == "Pass" and __dic_["cloudimage"] == "Pass" and __dic_["imagepresent"] == "Pass":
-                        __dic_["finalstatus"] = "Pass"
+                if self.check_count_of_children_in_json_app(__local_json_col2_child_list,col2_value_list) : #__local_json_col2_child_list == col2_value_list and len(__local_json_col2_child_list) != 0 and len(col2_value_list) != 0  # if child2 in json and app are matching
+                    childlist = __local_json_col2_child_list
+                    Childrenmatching = True
+                    if Childrenmatching and cloudimage and imagepresent:
+                        finalstatus = "Pass"
                     else:
-                        __dic_["finalstatus"] = "Fail"
+                        finalstatus = "Fail"
+                    __dic_ = self.add_values_to_dic(keyval=keyval,imagepresent=imagepresent,cloud=cloudimage,childrenmatching=Childrenmatching,finalstatus=finalstatus
+                                                     ,child_list=childlist)
                     TbmCouncilPage.child_validation_results.append(__dic_)
-                    self.validate_image_and_children(col2_id_list, __local_col1_child1, col_no+1, image_col_no + 1)
+                    #self.validate_image_and_children(col2_id_list, __local_col1_child1, col_no+1, image_col_no + 1)
                 else:
-                    if len(__local_json_col2_child_list) > len(col2_value_list):
-                        __child = "Json children count is more than application children count"
-                        __dic_["childrenstatus"] = "Fail"
-                        self.log.error(__local_json_col2_child_list)
-                        self.log.error(col2_value_list)
-                        #pytest.fail("Json data have more values than application..Please check")
-                    elif len(__local_json_col2_child_list) < len(col2_value_list):
-                        __child = "application children count is more than json children count"
-                        __dic_["childrenstatus"] = "Fail"
-                        self.log.error(__local_json_col2_child_list)
-                        self.log.error(col2_value_list)
-                        #pytest.fail("Application values in col2 are not matching with Json")
-                    else:
-                        __child = "No children present in json and application"
-                        print("No child present in col2 for given col1 value in Json and application")
-                        __dic_["childrenstatus"] = "Pass"
-                    __dic_["children"] = __child
-                    if __dic_["childrenstatus"] == "Pass" and __dic_["cloudimage"] == "Pass" and __dic_["imagepresent"] == "Pass":
-                        __dic_["finalstatus"] = "Pass"
-                    else:
-                        __dic_["finalstatus"] = "Fail"
-                    TbmCouncilPage.child_validation_results.append(__dic_)
-
-
-            #return TbmCouncilPage.child_validation_results
+                    self.compare_json_app_child_counts_in_else(__local_json_col2_child_list,col2_value_list,imagepresent,cloudimage,keyval)
         except:
             raise
 
-##################################################################################################################################
+    def check_count_of_children_in_json_app(self,__local_json_col2_child_list,col2_value_list):
+       if __local_json_col2_child_list == col2_value_list and len(__local_json_col2_child_list) != 0 and len(col2_value_list) != 0: # if child2 in json and app are matching
+           return True
+       else:
+           return False
 
-# Functions to validate description details
-    def validate_details_of_each_category_in_columns(self,json_data):
+    def compare_json_app_child_counts_in_else(self,__local_json_col2_child_list,col2_value_list,imagepresent,cloudimage,keyvalue):
+        __child = None
+        if len(__local_json_col2_child_list) > len(col2_value_list):
+            __child = "Json children count is more than application children count"
+            childmatching = False
+            self.log.error(__local_json_col2_child_list + " " + col2_value_list)
+        elif len(__local_json_col2_child_list) < len(col2_value_list):
+            __child = "Application children count is more than json children count"
+            childmatching = False
+            self.log.error(__local_json_col2_child_list + " " + col2_value_list)
+        else:
+            __child = "No children present in json and application"
+            childmatching = True
+
+        if childmatching and imagepresent and cloudimage:
+            finalstatus = "Pass"
+        else:
+            finalstatus = "Fail"
+        __dic_ = self.add_values_to_dic(keyval=keyvalue,imagepresent=imagepresent,cloud=cloudimage,childrenmatching=childmatching,finalstatus=finalstatus,child_list=__child)
+        TbmCouncilPage.child_validation_results.append(__dic_)
+    #
+    # def add_values_to_dic(self,val1,val2,val3,__dic_,child_list=None):
+    #     __dic_["Key_value"] = val1
+    #     __dic_["Imagepresent"] = val1
+    #     __dic_["Cloudimagepresent"] = val2
+        return __dic_
+
+    def add_values_to_dic(self,keyval,imagepresent,cloud,childrenmatching,finalstatus,child_list=None):
+        __dic_ = {}
+        __dic_["Key_value"] = keyval
+        __dic_["Imagepresent"] = imagepresent
+        __dic_["Cloudimagepresent"] = cloud
+        __dic_["Childlist"] = child_list
+        __dic_["Childrenmatching"] = childrenmatching
+        __dic_["FinalStatus"] = finalstatus
+        return __dic_
+
+########################################################################################################################
+# Functions to validate details for each category
+################################3#######################################################################################
+
+    def validate_details_of_each_category_in_columns(self,json_data,col1_id_list,col1_value_list):
         try:
             image_column_no = 0
-            col1_id_list, col1_value_list = self.check_and_get_category_values(0)
+            #col1_id_list, col1_value_list = self.check_and_get_category_values(0)
             for x in range(0, len(col1_id_list)):
                 __local_col1_child1 = json_data["children"][x]
                 self.click_on_child_element(col1_id_list[x])  # click on child element
@@ -213,12 +231,14 @@ class TbmCouncilPage(element,JsonHelpers):
                 self.come_out_of_details_section(image_column_no)
                 #time.sleep(1)
                 if len(col2_value_list) != 0:  # if child are present
-                    self.validate_details_of_children(col2_id_list, __local_col1_child1,2,image_column_no+1)
+                    #self.validate_details_of_children(col2_id_list, __local_col1_child1,2,image_column_no+1)
                     pass
             else:
                 print("there are no list values to run")
-        except:
+        except Exception as e:
+            #self.log.exception("Exception #####  {} ".format(e))
             raise
+
     def validate_details_of_children(self, col1_id_list, json_data_obj,child_col_no,image_col_no):
         try:
             for x in range(0, len(col1_id_list)):
@@ -228,7 +248,7 @@ class TbmCouncilPage(element,JsonHelpers):
                 self.click_on_image_element_of_selected_category(col1_id_list[x])
                 time.sleep(1)
                 __parent_name = TbmCouncilPage.col1_parent_name
-                self.categorydetailspageobject.compare_app_json_details_data(__local_col1_child,col1_id_list[x][4:],__parent_name)
+                self.categorydetailspageobject.compare_app_json_details_data(__local_col1_child,col1_id_list[x][4:],__parent_name,"details")
                 self.come_out_of_details_section(image_col_no)
                 col_id_list, col_value_list = self.check_and_get_category_values(child_col_no)  # check and get child count in col2 from app
                 if len(col_value_list) != 0:  # if child2 in json and app are matching
@@ -237,40 +257,68 @@ class TbmCouncilPage(element,JsonHelpers):
         except:
             raise
 
+########################################################################################################################
+# Functions to validate exclude and include details for each category
+################################3#######################################################################################
 
-            # def validate_description_values(self,col1_id_list,json_data_obj,n):
-            #     for x in range(0, len(col1_id_list)):
-            #         print (col1_id_list[x])
-            #         __local_col1_child = json_data_obj["children"][x]
-            #         self.click_on_child_element(col1_id_list[x])
-            #
-            #         col_id_list, col_value_list = self.check_and_get_category_values(n)  # check and get child count in col2 from app
-            #         __local_json_col_child_list = self.get_child_names_in_list(__local_col1_child)  # json child count in col2
-            #
-            #         #print("length of jsonlist and app in col2 {},{}".format(str(len(__local_json_col_child_list)),str(len(col_value_list))))
-            #         if __local_json_col_child_list == col_value_list and len(__local_json_col_child_list) != 0 and len(col_value_list) != 0:  # if child2 in json and app are matching
-            #             self.validate_col_values(col_id_list,__local_col1_child,n+1)
-            #         else:
-            #             if len(__local_json_col_child_list) > len(col_value_list):
-            #                 pytest.fail("Json data have more values than application..Please check ")
-            #             elif len(__local_json_col_child_list) < len(col_value_list):
-            #                 pytest.fail("Application values in col3 are not matching with Json")
-            #             else:
-            #                 print('\t\t' + "No child present for a given value in Json and application")
+    def validate_exclude_and_include_of_each_category(self, json_data,col1_id_list,col1_value_list):
+        try:
+            image_column_no = 0
+            #col1_id_list, col1_value_list = self.check_and_get_category_values(0)
+            for x in range(0, len(col1_id_list)):
+                __local_col1_child1 = json_data["children"][x]
+                self.click_on_child_element(col1_id_list[x])  # click on child element
+                TbmCouncilPage.col1_parent_name = col1_value_list[x]
+                col2_id_list, col2_value_list = self.check_and_get_category_values(1)  # check and get child count in col2 from application
+                self.click_on_image_element_of_selected_category(col1_id_list[x])
+                time.sleep(1)
+                self.categorydetailspageobject.compare_exclude_and_include_in_app_and_json(__local_col1_child1, col1_id_list[x][4:], TbmCouncilPage.col1_parent_name)
+                self.come_out_of_details_section(image_column_no)
+                # time.sleep(1)
+                if len(col2_value_list) != 0:  # if child are present
+                   # self.validate_exclude_and_include_of_children(col2_id_list, __local_col1_child1,2,image_column_no+1)
+                    pass
+            else:
+                print("there are no list values to run")
+        except Exception as e:
+            # self.log.exception("Exception #####  {} ".format(e))
+            raise
 
-#
-#
-# def validate_image_and_children_of_each_children(self, col1_id_list, json_data_obj, n,row_no):
+    def validate_exclude_and_include_of_children(self, col1_id_list, json_data_obj, n,row_no):
+        for x in range(0, len(col1_id_list)):
+            print(col1_id_list[x])
+            __local_col1_child = json_data_obj["children"][x]
+            self.click_on_child_element(col1_id_list[x])
+            col_id_list, col_value_list = self.check_and_get_category_values(n)  # check and get child count in col2 from app
+            __local_json_col_child_list = self.get_child_names_in_list(__local_col1_child)  # json child count in col2
+            self.click_on_image_element_of_selected_category(col1_id_list[x])
+            time.sleep(1)
+            self.categorydetailspageobject.compare_exclude_and_include_in_app_and_json(__local_col1_child,
+                                                                                       col1_id_list[x][4:],
+                                                                                       TbmCouncilPage.col1_parent_name)
+            self.come_out_of_details_section(row_no)
+            if len(col_value_list) != 0:  # if child2 in json and app are matching
+                self.validate_exclude_and_include_of_children(col_id_list, __local_col1_child, n + 1,row_no+1)
+            else:
+                if len(__local_json_col_child_list) > len(col_value_list):
+                    pytest.fail("Json data have more values than application..Please check ")
+                elif len(__local_json_col_child_list) < len(col_value_list):
+                    pytest.fail("Application values in col3 are not matching with Json")
+                else:
+                    print('\t\t' + "No child present for a given value in Json and application")
+
+# def validate_description_values(self,col1_id_list,json_data_obj,n):
 #     for x in range(0, len(col1_id_list)):
-#         print(col1_id_list[x])
+#         print (col1_id_list[x])
 #         __local_col1_child = json_data_obj["children"][x]
 #         self.click_on_child_element(col1_id_list[x])
-#         self.check_image_for_category(col1_id_list[x])
+#
 #         col_id_list, col_value_list = self.check_and_get_category_values(n)  # check and get child count in col2 from app
 #         __local_json_col_child_list = self.get_child_names_in_list(__local_col1_child)  # json child count in col2
-#         self.check_for_public_cloud_in_application_and_json(__local_col1_child, col1_id_list[x])  # check for cloud image
+#
+#         #print("length of jsonlist and app in col2 {},{}".format(str(len(__local_json_col_child_list)),str(len(col_value_list))))
 #         if __local_json_col_child_list == col_value_list and len(__local_json_col_child_list) != 0 and len(col_value_list) != 0:  # if child2 in json and app are matching
-#             self.validate_image_and_children_of_each_children(col_id_list, __local_col1_child, n + 1,row_no+1)
+#             self.validate_col_values(col_id_list,__local_col1_child,n+1)
 #         else:
 #             if len(__local_json_col_child_list) > len(col_value_list):
 #                 pytest.fail("Json data have more values than application..Please check ")
@@ -278,5 +326,3 @@ class TbmCouncilPage(element,JsonHelpers):
 #                 pytest.fail("Application values in col3 are not matching with Json")
 #             else:
 #                 print('\t\t' + "No child present for a given value in Json and application")
-#
-

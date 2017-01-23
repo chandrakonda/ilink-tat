@@ -14,10 +14,10 @@ class EnvironmentSetup(object):
     #__var_parent_folder_path = (os.path.normpath(os.path.join(os.getcwdb())))
     #sys.path.append("C:\\Workingdirectory\\python\\sublime_projects\\Autoforms_pytest")
     log = cl.customLogger(logging.DEBUG)
-    __var_parent_folder_path =  os.path.abspath(os.path.join(os.path.dirname("__file__")))
-    __var_framework_path = (os.path.normpath(os.path.join(__var_parent_folder_path, 'Framework')))
-    __var_dynamic_name = datetime.now().strftime("%Y%m%d%H%M%S")
-    var_today_date = datetime.now().strftime("%Y-%m-%d")  # current system date
+    var_parent_folder_path =  os.path.abspath(os.path.join(os.path.dirname("__file__")))
+    __var_framework_path = (os.path.normpath(os.path.join(var_parent_folder_path, 'Framework')))
+    var_dynamic_name = datetime.now().strftime("%Y%m%d%H%M%S")
+    var_today_date = datetime.now().strftime("%Y%m%d")  # current system date
     driver_type = None
     dict_config_values = None
     __driver = None
@@ -30,7 +30,7 @@ class EnvironmentSetup(object):
 
     @classmethod
     def get_parent_folder_path(cls):
-        return cls.__var_parent_folder_path
+        return cls.var_parent_folder_path
 
     @classmethod
     def get_framework_path(cls):
@@ -38,7 +38,7 @@ class EnvironmentSetup(object):
 
     @classmethod
     def get_dynamic_name(cls):
-        return cls.__var_dynamic_name
+        return cls.var_dynamic_name
 
     @classmethod
     def get_todays_date(cls):
